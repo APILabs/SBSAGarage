@@ -5,7 +5,7 @@ CREATE COMPUTE MODULE BuildDummyBar_Compute
 	BEGIN
 		-- CALL CopyMessageHeaders();
 		-- CALL CopyEntireMessage();
-		
+		Set OutputRoot.JSON.Data.pingbasic.Server = ExecutionGroupLabel;
 		Set OutputRoot.JSON.Data.pingbasic.Server = ExecutionGroupLabel;
 		Set OutputRoot.JSON.Data.pingbasic.WorkPath = WorkPath;
 		set OutputRoot.JSON.Data.pingbasic.MsgFlow = MessageFlowLabel; 
