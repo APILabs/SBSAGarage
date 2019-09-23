@@ -7,7 +7,7 @@ CREATE COMPUTE MODULE BuildDummyBar_Compute
 		-- CALL CopyEntireMessage();
 		
 		Set OutputRoot.JSON.Data.pingbasic.Server = ExecutionGroupLabel;
-		 Set OutputRoot.JSON.Data.pingbasic.WorkPath = WorkPath;
+		Set OutputRoot.JSON.Data.pingbasic.WorkPath = WorkPath;
 		set OutputRoot.JSON.Data.pingbasic.MsgFlow = MessageFlowLabel; 
 		set OutputRoot.JSON.Data.pingbasic.DateTime = CURRENT_TIMESTAMP;
 		
