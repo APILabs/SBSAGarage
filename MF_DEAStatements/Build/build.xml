@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<project name="project" default="run">
+  <target name="run" description="">
+    <property name="toolkit.home" value="C:\Program Files\ibm\ACE\11.0.0.5\tools" />
+    <property name="ant.bars.basedir" value="C:\Users\ccguest\IBM\ACET11\AntBars" />
+    <property name="bar.name" value="${ant.bars.basedir}\DEAStatement.bar" />
+    <property name="workspace.dir" value="C:\Users\ccguest\git\SBSAGarage" />
+    <antcall target="build" />
+  </target>
+  <target name="build">
+     <echo message="Building the Message Broker Project @ ${workspace.dir}" />
+     <exec executable="${toolkit.home}\mqsicreatebar.exe" spawn="false">
+        <arg value="-data" />
+            <arg value="${workspace.dir}" />
+        <arg value="-b" />
+            <arg value="${bar.name}" />
+        <!-- List all the files to be included in the archive -->
+        <arg value="-o" />
+            <arg value="MS_DEAStatementsV1_0_Provide\MS_DEAStatementsV1_0_Provide\messageSet.mset" />
+         <!-- List all the message flow projects -->    
+        <arg value="-p" />
+            <arg value="MS_DEAStatementsV1_0_Provide" />
+          <!-- The Application Name -->    
+        <arg value="-a" />
+        <arg value="MF_DEAStatements" />
+     </exec>
+  </target>
+</project>
