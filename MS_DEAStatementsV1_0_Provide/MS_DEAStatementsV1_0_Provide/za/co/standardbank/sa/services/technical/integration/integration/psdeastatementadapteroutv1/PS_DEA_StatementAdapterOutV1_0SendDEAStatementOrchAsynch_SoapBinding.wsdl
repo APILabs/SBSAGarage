@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- edited with XMLSpy v2013 (http://www.altova.com) by Thabo Myema (The Standard Bank of South Africa Limited) --><wsdl:definitions name="PS_DEA_StatementAdapterOutV1" targetNamespace="http://standardbank.co.za/sa/services/Technical/Integration/Integration/PS_DEA_StatementAdapterOutV1" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:q1="http://IDX.FaultService/V1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:srv="http://IDX.IBIDXService/V1" xmlns:tns="http://standardbank.co.za/sa/services/Technical/Integration/Integration/PS_DEA_StatementAdapterOutV1" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="PS_DEA_StatementAdapterOutV1SoapBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+	<wsdl:import location="../../../../../../../../../ibidxservice/idx/v1/PS_DEA_StatementAdapterOutV1_0SendDEAStatementOrchAsynch.wsdl" namespace="http://IDX.IBIDXService/V1"/>
+	<wsdl:binding name="PS_DEA_StatementAdapterOutV1SoapBinding" type="srv:PS_DEA_StatementAdapterOutV1">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="SendDEAStatementOrchAsynch">
+			<soap:operation soapAction="http://IDX.IBIDXService/IIBIDXService/Submit" style="document"/>
+			<wsdl:input>
+				<soap:header message="srv:IIBIDXService_Submit_InputMessage" part="IDXHeader" use="literal"/>
+				<soap:body parts="parameters" use="literal"/>
+			</wsdl:input>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="PS_DEA_StatementAdapterOutV1Service">
+		<wsdl:port binding="tns:PS_DEA_StatementAdapterOutV1SoapBinding" name="PS_DEA_StatementAdapterOutV1Port">
+			<soap:address location="http://standardbank.co.za/sa/services/technical/integration/integration/ps_dea_statementadapteroutv1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

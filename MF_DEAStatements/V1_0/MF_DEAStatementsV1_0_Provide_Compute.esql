@@ -1,0 +1,12 @@
+BROKER SCHEMA V1_0
+
+
+CREATE COMPUTE MODULE MF_DEAStatementsV1_0_Provide_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		 --CALL CopyMessageHeaders();
+		 --CALL CopyEntireMessage();
+		RETURN TRUE;
+	END;
+
+END MODULE;
