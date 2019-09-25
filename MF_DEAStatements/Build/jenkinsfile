@@ -7,7 +7,7 @@ pipeline {
             checkout([
                        $class: 'GitSCM',
                        branches: [[name: '*/master']],
-                       extensions: scm.extensions + [[$class: 'LocalBranch’,'C:\Users\ccguest\AntWS'], [$class: 'WipeWorkspace']],
+                       extensions: scm.extensions + [[$class: 'LocalBranch’,'C:\Users\ccguest\AntWStst'], [$class: 'WipeWorkspace']],
                           userRemoteConfigs: [[credentialsId: 'githubcredid', url: 'https://github.com/APILabs/SBSAGarage.git']],
                        doGenerateSubmoduleConfigurations: false
                ])
