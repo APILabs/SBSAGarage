@@ -30,7 +30,6 @@ pipeline {
                 script {
                     def dockerfile = 'dockerfile.ace'
 		    def customImage = docker.build("ace_dea:${env.BUILD_ID}", "-f ${dockerfile} ./MF_DEAStatements/Build") 
-                    customImage.push()
                      }
                   }
 	  }
