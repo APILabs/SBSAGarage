@@ -14,5 +14,16 @@ pipeline {
                		])
                	}
         }
+        stage('Build Ant')
+        {
+        	steps {
+            	withAnt(installation: 'antlocal') 
+				{
+					//for windows
+					bat "ant -buildfile C:\Users\ccguest\Build\build.xml"
+				}
+            }
+				
+        }
     }
 }
