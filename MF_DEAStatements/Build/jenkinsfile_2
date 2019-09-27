@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    stages
+     {
+        stage('pull from git')
+        {
+        	steps {
+            	checkout([
+                       $class: 'GitSCM',
+                       branches: [[name: '*/master']],
+                       extensions: scm.extensions + [[$class: 'LocalBranch'], [$class: 'WipeWorkspace']],
+                       userRemoteConfigs: [[credentialsId: 'githubcredid', url: 'https://github.com/APILabs/SBSAGarage.git']],
+                      
+               		])
+               	}
+        }
+	stage('Build image') {
+            steps {
+                echo 'Starting to build docker image'
+                script {
+                    def dockerfile = 'dockerfile.ace'
+		    docker.build("ace_dea:${env.BUILD_ID}", "./MF_DEAStatements/Build")
+                     }
+                  }
+	  }
+    }
+}
