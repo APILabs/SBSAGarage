@@ -33,7 +33,6 @@ pipeline {
                 export DOCKER_CERT_PATH="C:/Users/ccguest/.docker/machine/machines/default"
                 export DOCKER_MACHINE_NAME="default"
                 export COMPOSE_CONVERT_WINDOWS_PATHS="true"
-		cd MF_DEAStatements
                 pwd
                 ls -lrt
                     """
