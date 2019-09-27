@@ -1,4 +1,0 @@
-FROM ibmcom/ace:latest
-
-COPY c/workspace/docker-build-pipeline/MF_DEAStatements/Bars /home/aceuser/bars
-RUN ace_compile_bars.sh
