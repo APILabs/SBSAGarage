@@ -35,11 +35,6 @@ pipeline {
 			export COMPOSE_CONVERT_WINDOWS_PATHS="true"
 			cd MF_DEAStatements
                     """
-                    }
-        }
-        stage('Build image')
-        {
-                steps {
                     echo 'Starting to build docker image'
                     script {
                         def dockerfile = 'dockerfile.ace_dea'
