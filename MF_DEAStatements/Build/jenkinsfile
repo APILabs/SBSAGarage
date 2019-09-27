@@ -19,7 +19,7 @@ pipeline {
         	steps {
             	withAnt(installation: 'antlocal') 
 				{
-					bat "ant -buildfile C:/Program Files (x86)/Jenkins/workspace/Step1-Pipeline/MF_DEAStatements/Build/build.xml"
+					bat "ant -buildfile C:/'Program Files (x86)'/Jenkins/workspace/Step1-Pipeline/MF_DEAStatements/Build/build.xml"
 				}
            	 }
 				
