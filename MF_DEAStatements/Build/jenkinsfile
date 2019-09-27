@@ -24,14 +24,28 @@ pipeline {
            	 }
 				
         }
-	stage('Build image') {
+	stage('Set Docker Env') 
+	{
+            steps {
+                sh """
+                    export DOCKER_TLS_VERIFY="1"
+					export DOCKER_HOST="tcp://192.168.99.100:2376"
+					export DOCKER_CERT_PATH="C:\Users\ccguest\.docker\machine\machines\default"
+					export DOCKER_MACHINE_NAME="default"
+					export COMPOSE_CONVERT_WINDOWS_PATHS="true"
+                """
+                   }
+                }
+	}
+	stage('Build image')
+	{
             steps {
                 echo 'Starting to build docker image'
                 script {
                     def dockerfile = 'dockerfile.ace_dea'
 		    docker.build("ace_dea:${env.BUILD_ID}", "./MF_DEAStatements/Build/dockerfile.ace_dea")
                      }
-                  }
-	  }
+                 }
+	}
     }
 }
