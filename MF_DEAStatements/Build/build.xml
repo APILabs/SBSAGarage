@@ -4,7 +4,7 @@
     <property name="toolkit.home" value="C:\Program Files\ibm\ACE\11.0.0.5\tools" />
     <property name="ant.bars.basedir" value="${workspace.dir}\${project.name}\Bars" />
     <property name="bar.name" value="${ant.bars.basedir}\DEAStatement.bar" />
-    <property name="workspace.dir" value="C:\Users\ccguest\AntWS" />
+    <property name="workspace.dir" value="C:\Program Files (x86)\Jenkins\workspace\Step1-Pipeline" />
   	<property name="project.name" value="MF_DEAStatements" />
     <antcall target="build" />
   </target>
