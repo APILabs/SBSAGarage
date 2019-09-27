@@ -1,4 +1,4 @@
 FROM ibmcom/ace:latest
 
-COPY ../Bars /home/aceuser/bars
+COPY MF_DEAStatements/Bars /home/aceuser/bars
 RUN ace_compile_bars.sh
