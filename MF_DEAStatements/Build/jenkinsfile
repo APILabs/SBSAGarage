@@ -39,7 +39,9 @@ pipeline {
                 steps {
                     echo 'Tag the image and push to OC'
                     sh """
-
+			oc login https://masterdnskoqhav52vva4i.westeurope.cloudapp.azure.com:443 --insecure-skip-tls-verify -u Developer1 -p Developer1
+                        // login to docker registry on openshift cluster
+                        
                     """
                     }
         }
