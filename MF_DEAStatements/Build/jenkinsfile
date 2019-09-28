@@ -19,7 +19,7 @@ pipeline {
         	steps {
             	withAnt(installation: 'antlocal') 
 				{
-					bat "ant -buildfile ./MF_DEAStatements/Build/build.xml"
+					bat "ant -buildfile ./MF_DEAStatements/Build/build2.xml"
 				}
            	 }
 				
