@@ -41,6 +41,8 @@ pipeline {
                     sh """
 			oc login https://masterdnskoqhav52vva4i.westeurope.cloudapp.azure.com:443 --insecure-skip-tls-verify -u Developer1 -p Developer1
                         // login to docker registry on openshift cluster
+			docker login -u $(oc whoami) -p $(oc whoami -t) docker-registry-default.40.68.250.242.nip.io
+                        
                         
                     """
                     }
