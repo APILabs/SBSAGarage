@@ -11,7 +11,6 @@
   </target>
   <target name="build">
      <echo message="Building the Message Broker Project @ ${workspace.dir}" />
-     <exec executable="/usr/bin/Xvfb :100 && DISPLAY=:100">
      <exec executable="${toolkit.home}/mqsicreatebar" spawn="false">
 	<env key="DISPLAY" value=":100"/>
         <arg value="-data" />
