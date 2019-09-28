@@ -30,7 +30,7 @@ pipeline {
                     echo 'Starting to build docker image'
                     script {
                         def dockerfile = 'dockerfile.ace_dea'
-                        def customImage = docker.build("ace_dea:${env.BUILD_ID}", "-f ./MF_DEAStatements/Build/${dockerfile} .")           
+                        def customImage = docker.build("ace_dea:${env.BUILD_ID}", "-f ./MF_DEAStatements/Build/${dockerfile} ./MF_DEAStatements")           
                         }
                     }
         }
