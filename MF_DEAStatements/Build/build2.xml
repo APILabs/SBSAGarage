@@ -6,13 +6,15 @@
     <property name="bar.name" value="${ant.bars.basedir}/DEAStatement.bar" />
     <property name="workspace.dir" value="/var/jenkins_home/workspace/pipeline" />
     <property name="project.name" value="MF_DEAStatements" />
-        <property environment="env"/>
-	    <property name="env.DISPLAY" value=":100"/>
+    <property environment="env"/>
+    <exec>
+        <env key="DISPLAY" value=":100"/>
+    </exec>
     <antcall target="build" />
   </target>
   <target name="build">
      <echo message="Building the Message Broker Project @ ${workspace.dir}" />
-     <exec executable="export DISPLAY=:100"/>
+     
      <exec executable="${toolkit.home}/mqsicreatebar" spawn="false">
         <arg value="-data" />
             <arg value="${workspace.dir}" />
