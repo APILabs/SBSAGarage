@@ -41,8 +41,8 @@ pipeline {
                     
 			sh oc login https://masterdnskoqhav52vva4i.westeurope.cloudapp.azure.com:443 --insecure-skip-tls-verify -u Developer1 -p Developer1
                         // login to docker registry on openshift cluster
-			sh export user = $(oc whoami)
-			sh export pwd =  $(oc whoami -t)
+			sh export user = ${oc whoami}
+			sh export pwd =  ${oc whoami -t}
 		  sh """
 			docker login -u ${user} -p ${pwd} docker-registry-default.40.68.250.242.nip.io
 			// tag docker image to push
