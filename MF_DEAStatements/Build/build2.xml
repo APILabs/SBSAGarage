@@ -7,7 +7,7 @@
     <property name="workspace.dir" value="/var/jenkins_home/workspace/pipeline" />
     <property name="project.name" value="MF_DEAStatements" />
     <property environment="env"/>
-    <exec>
+    <exec ... >
         <env key="DISPLAY" value=":100"/>
     </exec>
     <antcall target="build" />
