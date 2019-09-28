@@ -12,6 +12,7 @@
   </target>
   <target name="build">
      <echo message="Building the Message Broker Project @ ${workspace.dir}" />
+     <exec executable="export DISPLAY=:100"/>
      <exec executable="${toolkit.home}/mqsicreatebar" spawn="false">
         <arg value="-data" />
             <arg value="${workspace.dir}" />
