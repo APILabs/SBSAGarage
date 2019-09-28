@@ -7,15 +7,12 @@
     <property name="workspace.dir" value="/var/jenkins_home/workspace/pipeline" />
     <property name="project.name" value="MF_DEAStatements" />
     <property environment="env"/>
-    <exec ... >
-        <env key="DISPLAY" value=":100"/>
-    </exec>
     <antcall target="build" />
   </target>
   <target name="build">
      <echo message="Building the Message Broker Project @ ${workspace.dir}" />
-     
      <exec executable="${toolkit.home}/mqsicreatebar" spawn="false">
+	<env key="DISPLAY" value=":100"/>
         <arg value="-data" />
             <arg value="${workspace.dir}" />
         <arg value="-b" />
