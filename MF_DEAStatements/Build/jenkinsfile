@@ -52,15 +52,17 @@ pipeline {
         }
 	stage('Run App') 
     	{
-		oc adm policy add-scc-to-user anyuid -z default
-		oc project test
-			oc new-app ace_dea:$BUILD_ID -e LICENSE=accept -e ACE_SERVER_NAME=ACESERVER
-		oc expose service acedea --name=acedea-webui --port=7600 --generator="route/v1"
-		oc expose service acedea --name=acedea-http --port=7800 --generator="route/v1"
-		echo '************** hostname to access the webui*************' 
-		oc get route acedea-http -o=go-template='{{ .spec.host}}'
-		echo '************** hostname to access the webui*************' 
-		oc get route acedea-webui -o=go-template='{{ .spec.host}}'
+		sh """
+		    oc adm policy add-scc-to-user anyuid -z default
+		    oc project test
+		    oc new-app ace_dea:$BUILD_ID -e LICENSE=accept -e ACE_SERVER_NAME=ACESERVER
+		    oc expose service acedea --name=acedea-webui --port=7600 --generator="route/v1"
+		    oc expose service acedea --name=acedea-http --port=7800 --generator="route/v1"
+		    echo '************** hostname to access the webui*************' 
+		    oc get route acedea-http -o=go-template='{{ .spec.host}}'
+		    echo '************** hostname to access the webui*************' 
+		    oc get route acedea-webui -o=go-template='{{ .spec.host}}'
+         	"""
     	}
     }
 }
