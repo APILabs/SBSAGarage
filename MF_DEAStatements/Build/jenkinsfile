@@ -54,7 +54,6 @@ pipeline {
     	{
 	    steps {
 		sh """
-		    oc adm policy add-scc-to-user anyuid -z default
 		    oc project test
 		    oc new-app ace_dea:$BUILD_ID -e LICENSE=accept -e ACE_SERVER_NAME=ACESERVER
 		    oc expose service acedea --name=acedea-webui --port=7600 --generator="route/v1"
