@@ -45,12 +45,8 @@ pipeline {
 		  sh """
 		  	oc login  https://192.168.64.3:8443 --insecure-skip-tls-verify -u system -p adasdasd
 			docker login -u system -p acjgEi4OF86gFitlI-rMGf6OAVkaDuWOB1lXnah4TyQ docker-registry-default.192.168.64.3.nip.io
-			// tag docker image to push
                         docker tag ace_dea:${env.BUILD_ID} docker-registry-default.192.168.64.3.nip.io/test/ace_dea:${env.BUILD_ID}
-                        // tag docker image to push
                         docker push docker-registry-default.192.168.64.3.nip.io/test/ace_dea:${env.BUILD_ID}
-                        
-                        
                     """
                     }
         }
