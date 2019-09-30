@@ -1,4 +1,4 @@
-FROM ibmcom/ace:latest
+FROM ace_httpbar:1.0.0
 
 COPY Bars/*.bar /home/aceuser/bars/
 RUN ace_compile_bars.sh
