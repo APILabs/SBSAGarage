@@ -58,11 +58,11 @@ pipeline {
 		    oc new-app ${env.APP_NAME}:$BUILD_ID -e LICENSE=accept
 		    oc expose service ${env.APP_NAME} --name=${env.APP_NAME}-webui --port=7600 --generator="route/v1"
 		    oc expose service ${env.APP_NAME} --name=${env.APP_NAME}-http --port=7800 --generator="route/v1"
+		"""    
 		    echo '************** hostname to access the webui*************' 
-		    oc get route ${env.APP_NAME}-http -o=go-template='{{ .spec.host}}'
+		    sh oc get route ${env.APP_NAME}-http -o=go-template='{{ .spec.host}}'
 		    echo '************** hostname to access the webui*************' 
-		    oc get route ${env.APP_NAME}-webui -o=go-template='{{ .spec.host}}'
-         	"""
+		    sh oc get route ${env.APP_NAME}-webui -o=go-template='{{ .spec.host}}'
 	    }
     	}
     }
