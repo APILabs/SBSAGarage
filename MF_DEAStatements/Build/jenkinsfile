@@ -29,8 +29,8 @@ pipeline {
                 steps {
                     echo 'Starting to build docker image'
                     script {
-                        def dockerfile = 'dockerfile.ace_dea'
-                        def customImage = docker.build("ace_dea:${env.BUILD_ID}", "-f ./${env.PROJECT_NAME}/Build/${dockerfile} ./${env.PROJECT_NAME}")           
+                        def dockerfile = 'dockerfile'
+                        def customImage = docker.build("${env.APP_NAME}:${env.BUILD_ID}", "-f ./${env.PROJECT_NAME}/Build/${dockerfile} ./${env.PROJECT_NAME}")           
                         }
                     }
         }
@@ -43,10 +43,10 @@ pipeline {
 			//sh export user = ${oc whoami}
 			//sh export pwd =  ${oc whoami -t}
 		  sh """
-		  	oc login  https://192.168.64.3:8443 --insecure-skip-tls-verify -u system -p adasdasd
-			docker login -u system -p acjgEi4OF86gFitlI-rMGf6OAVkaDuWOB1lXnah4TyQ docker-registry-default.192.168.64.3.nip.io
-                        docker tag ace_dea:${env.BUILD_ID} docker-registry-default.192.168.64.3.nip.io/test/ace_dea:${env.BUILD_ID}
-                        docker push docker-registry-default.192.168.64.3.nip.io/test/ace_dea:${env.BUILD_ID}
+		  	oc login  ${env.OC_CLUSTER} --insecure-skip-tls-verify -u system -p adasdasd
+			docker login -u system -p ${env.AUTH_TOKEN} ${env.DOCKER_REGISTRY}
+                        docker tag ${env.APP_NAME}:${env.BUILD_ID} ${env.DOCKER_REGISTRY}/${env.OC_PROJECT}/${env.APP_NAME}:${env.BUILD_ID}
+                        docker push ${env.DOCKER_REGISTRY}/${env.OC_PROJECT}/${env.APP_NAME}:${env.BUILD_ID}
                     """
                     }
         }
@@ -54,14 +54,14 @@ pipeline {
     	{
 	    steps {
 		sh """
-		    oc project test
-		    oc new-app ace_dea:$BUILD_ID -e LICENSE=accept -e ACE_SERVER_NAME=ACESERVER
-		    oc expose service acedea --name=acedea-webui --port=7600 --generator="route/v1"
-		    oc expose service acedea --name=acedea-http --port=7800 --generator="route/v1"
+		    oc project ${env.OC_PROJECT}
+		    oc new-app ${env.APP_NAME}:$BUILD_ID -e LICENSE=accept
+		    oc expose service ${env.APP_NAME} --name=${env.APP_NAME}-webui --port=7600 --generator="route/v1"
+		    oc expose service ${env.APP_NAME} --name=${env.APP_NAME}-http --port=7800 --generator="route/v1"
 		    echo '************** hostname to access the webui*************' 
-		    oc get route acedea-http -o=go-template='{{ .spec.host}}'
+		    oc get route ${env.APP_NAME}-http -o=go-template='{{ .spec.host}}'
 		    echo '************** hostname to access the webui*************' 
-		    oc get route acedea-webui -o=go-template='{{ .spec.host}}'
+		    oc get route ${env.APP_NAME}-webui -o=go-template='{{ .spec.host}}'
          	"""
 	    }
     	}
