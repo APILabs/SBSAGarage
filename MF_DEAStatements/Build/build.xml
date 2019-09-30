@@ -2,9 +2,9 @@
 <project name="project" default="run">
   <target name="run" description="">
 	  <property name="toolkit.home" value="/opt/ibm/ace-11/tools" />
-	  <property name="ant.bars.basedir" value="${workspace.dir}/${project.name}/Bars" />
-    <property name="bar.name" value="${ant.bars.basedir}/DEAStatement.bar" />
-    <property name="workspace.dir" value="/var/jenkins_home/workspace/pipeline1@script" />
+	  <property name="ant.bars.basedir" value="/var/jenkins_home/workspace/pipeline1/MF_DEAStatements/Bars" />
+    <property name="bar.name" value="/var/jenkins_home/workspace/pipeline1/MF_DEAStatements/Bars/DEAStatement.bar" />
+    <property name="workspace.dir" value="/var/jenkins_home/workspace/pipeline1" />
     <property name="project.name" value="MF_DEAStatements" />
     <property environment="env"/>
     <antcall target="build" />
