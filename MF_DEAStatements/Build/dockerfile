@@ -1,4 +1,4 @@
-FROM ace_httpbar:1.0.0
+FROM 172.30.1.1:5000/test/ace_httpbar:1.0.0
 
 COPY Bars/*.bar /home/aceuser/bars/
 RUN ace_compile_bars.sh
