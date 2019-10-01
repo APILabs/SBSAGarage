@@ -30,7 +30,7 @@ pipeline {
 	      {
                 dir('MF_DEAStatements') 
 		{
-                  sh 'cat Build/dockerfile | oc new-build -D - --name acetest'
+                  sh 'cat Build/dockerfile | oc new-build -D - --name acetest --from-dir . --follow'
                 }
               }
           }
