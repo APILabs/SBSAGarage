@@ -52,7 +52,7 @@ pipeline {
 	      {
                 dir(srcfolder) 
 		{
-                  sh 'cat Build/dockerfile | oc new-build -D - --name ' appName
+                  sh 'cat Build/dockerfile | oc new-build -D - --name  $appName'
                 }
               }
           }
