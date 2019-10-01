@@ -1,4 +1,6 @@
-
+def srcfolder = 'MF_DEAStatements' 
+def appName = 'ace-demo' 
+def projectName = 'ace-sbsa' 
 pipeline {
     agent any
     stages
@@ -79,7 +81,7 @@ pipeline {
 		   echo "new-app created ${created.count()} objects named: ${created.names()}"
         	   created.describe()
 		   
-		   def rm = openshift.selector("dc", templateName).rollout()
+		   def rm = openshift.selector("dc", 'ace-demo').rollout()
                    timeout(2) 
 		   { 
 			    openshift.selector("dc", 'ace-demo').related('pods').untilEach(1) 
