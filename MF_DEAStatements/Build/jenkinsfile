@@ -1,4 +1,4 @@
-def Project = ${env.PROJECT_NAME}
+def Project = $(env.PROJECT_NAME)
 pipeline {
     agent any
     stages
