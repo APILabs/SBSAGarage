@@ -106,6 +106,6 @@ pipeline {
 		    oc get route ${env.APP_NAME}-webui -o=go-template='{{ .spec.host}}'
 		  """  
 	    }
-	
+	}
     }
 }
