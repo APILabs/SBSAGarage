@@ -13,18 +13,17 @@ pipeline {
                        branches: [[name: '*/master']],
                        extensions: scm.extensions + [[$class: 'LocalBranch'], [$class: 'WipeWorkspace']],
                        userRemoteConfigs: [[credentialsId: 'githubcredid', url: 'https://github.com/APILabs/SBSAGarage.git']],
-                      
                		])
                	}
         }
         stage('Build Ant')
         {
-        	steps {
+           steps {
             	withAnt(installation: 'antlocal') 
-				{
-					sh "ant -buildfile ./${env.PROJECT_NAME}/Build/build.xml"
-				}
-           	 }
+		{
+			sh "ant -buildfile ./${env.PROJECT_NAME}/Build/build.xml"
+		}
+            }
 				
         }
 	stage('cleanup') 
@@ -84,10 +83,10 @@ pipeline {
 		   def rm = openshift.selector("dc", 'ace-demo').rollout()
                    timeout(2) 
 		   { 
-			    openshift.selector("dc", 'ace-demo').related('pods').untilEach(1) 
-			    {
-			      return (it.object().status.phase == "Running")
-			    }
+		      openshift.selector("dc", 'ace-demo').related('pods').untilEach(1) 
+			{
+			  return (it.object().status.phase == "Running")
+			}
                   }
 		}
               }
