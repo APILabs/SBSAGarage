@@ -1,4 +1,4 @@
-FROM docker-registry-default.192.168.64.3.nip.io/test/ace_httpbar:1.0.0
+FROM ibm-ace-server-prod:11.0.0.5-amd64
 
 COPY Bars/*.bar /home/aceuser/bars/
 RUN ace_compile_bars.sh
