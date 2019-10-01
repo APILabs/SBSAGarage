@@ -36,6 +36,10 @@ pipeline {
                 openshift.withProject('ace-sbsa')
 		{
                   openshift.selector("all", [ build : 'acetest123' ]).delete() 
+		  if (openshift.selector("pods", ace-demo).exists()) 
+		  { 
+                    openshift.selector("all", [ app : 'ace-demo' ]).delete() 
+                  }
                 }
               }
             }
@@ -47,7 +51,7 @@ pipeline {
 	      {
                 dir('MF_DEAStatements') 
 		{
-                  sh 'cat Build/dockerfile | oc new-build -D - --name acetest123'
+                  sh 'cat Build/dockerfile | oc new-build -D - --name ace-demo'
                 }
               }
           }
@@ -61,15 +65,23 @@ pipeline {
                 }
               }
           }
-	   stage("Run Build to create ace") 
-	{
-              steps 
+	  stage('Run') 
+	  {
+      	  steps 
+	  {
+            script 
+	    {
+              openshift.withCluster('mycluster') 
 	      {
-                dir('MF_DEAStatements') 
+                openshift.withProject('ace-sbsa')
 		{
-                  sh 'oc start-build acetest123 --from-dir . --follow'
-                }
+                   def created = openshift.newApp( 'ace-demo:latest', '-e LICENSE=accept -e ACE_SERVER_NAME=ACESERVER' , '--name=ace-demo')|
+                   echo "new-app created ${created.count()} objects named: ${created.names()}"
+        	   created.describe()
+		}
               }
+            }
           }
+        }
     }
 }
