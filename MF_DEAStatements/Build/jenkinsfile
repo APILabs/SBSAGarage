@@ -1,3 +1,4 @@
+def Project = ${env.PROJECT_NAME}
 pipeline {
     agent any
     stages
@@ -24,6 +25,22 @@ pipeline {
            	 }
 				
         }
+	stage('cleanup') 
+	{
+      	  steps 
+	  {
+            script 
+	    {
+              openshift.withCluster('mycluster') 
+	      {
+                openshift.withProject('ace-sbsa')
+		{
+                  openshift.selector("all", [ build : 'acetest123' ]).delete() 
+                }
+              }
+            }
+          }
+        }
 	stage("Build Image") 
 	{
               steps 
@@ -35,6 +52,16 @@ pipeline {
               }
           }
 	  stage("Start Build") 
+	{
+              steps 
+	      {
+                dir('MF_DEAStatements') 
+		{
+                  sh 'oc start-build acetest123 --from-dir . --follow'
+                }
+              }
+          }
+	   stage("Run Build to create ace") 
 	{
               steps 
 	      {
