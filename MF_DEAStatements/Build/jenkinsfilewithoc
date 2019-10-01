@@ -14,16 +14,6 @@ pipeline {
                		])
                	}
         }
-        stage('Build Ant')
-        {
-        	steps {
-            	withAnt(installation: 'antlocal') 
-				{
-					sh "ant -buildfile ./${env.PROJECT_NAME}/Build/build.xml"
-				}
-           	 }
-				
-        }
         stage('Set Docker Env') 
         {
                 steps {
