@@ -1,12 +1,4 @@
-properties([
-  parameters([
-    string(name: 'DEPLOY_ENV', defaultValue: 'TESTING', description: 'The target environment', )
-    string(name: 'OC_CLUSTER', defaultValue: 'https://masterdnskoqhav52vva4i.westeurope.cloudapp.azure.com', description: 'The target environment', )
-    string(name: 'PROJECT_NAME', defaultValue: 'MF_DEAStatement', description: 'The target environment', )
-    string(name: 'APP_NAME', defaultValue: 'ace-demo', description: 'The target environment', )
-    string(name: 'OC_PROJECT', defaultValue: 'ace-sbsa', description: 'The target environment', )
-   ])
-])
+
 pipeline {
     agent any
     stages
