@@ -36,10 +36,10 @@ pipeline {
 	      {
                 openshift.withProject(projectName)
 		{
-                  openshift.selector("all", [ build : 'ace-demo' ]).delete() 
-		  if (openshift.selector("pods", [ app : 'ace-demo' ]).exists()) 
+                  openshift.selector("all", [ build : appName ]).delete() 
+		  if (openshift.selector("pods", [ app : appName ]).exists()) 
 		  { 
-                    openshift.selector("all", [ app : 'ace-demo' ]).delete() 
+                    openshift.selector("all", [ app : appName ]).delete() 
                   }
                 }
               }
@@ -50,9 +50,9 @@ pipeline {
 	{
               steps 
 	      {
-                dir('MF_DEAStatements') 
+                dir(srcfolder) 
 		{
-                  sh 'cat Build/dockerfile | oc new-build -D - --name ace-demo'
+                  sh 'cat Build/dockerfile | oc new-build -D - --name ' appName
                 }
               }
           }
@@ -60,7 +60,7 @@ pipeline {
 	{
               steps 
 	      {
-                dir('MF_DEAStatements') 
+                dir(srcfolder) 
 		{
                   sh 'oc start-build ace-demo --from-dir . --follow'
                 }
