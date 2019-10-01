@@ -36,7 +36,7 @@ pipeline {
                 openshift.withProject('ace-sbsa')
 		{
                   openshift.selector("all", [ build : 'acetest123' ]).delete() 
-		  if (openshift.selector("pods", ace-demo).exists()) 
+		  if (openshift.selector("pods", 'ace-demo').exists()) 
 		  { 
                     openshift.selector("all", [ app : 'ace-demo' ]).delete() 
                   }
