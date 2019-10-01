@@ -28,7 +28,7 @@ pipeline {
 	{
               steps 
 	      {
-                dir(${env.PROJECT_NAME}) 
+                dir('MF_DEAStatements') 
 		{
                   sh 'cat Build/dockerfile | oc new-build -D - --name acetest'
                 }
