@@ -51,7 +51,7 @@ pipeline {
 	      {
                 dir(srcfolder) 
 		{
-                  sh "oc start-build ${appName}" --from-dir . --follow"
+                  sh "oc start-build ${appName} --from-dir . --follow"
                 }
               }
           }
