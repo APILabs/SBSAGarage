@@ -75,8 +75,8 @@ pipeline {
 	      {
                 openshift.withProject('ace-sbsa')
 		{
-                   def created = openshift.newApp( 'ace-demo:latest', '-e LICENSE=accept -e ACE_SERVER_NAME=ACESERVER' , '--name=ace-demo')|
-                   echo "new-app created ${created.count()} objects named: ${created.names()}"
+                   def created = openshift.newApp( 'ace-demo:latest', '-e LICENSE=accept -e ACE_SERVER_NAME=ACESERVER' , '--name=ace-demo')
+		   echo "new-app created ${created.count()} objects named: ${created.names()}"
         	   created.describe()
 		}
               }
