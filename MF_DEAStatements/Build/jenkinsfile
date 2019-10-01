@@ -30,7 +30,17 @@ pipeline {
 	      {
                 dir('MF_DEAStatements') 
 		{
-                  sh 'cat Build/dockerfile | oc new-build -D - --name acetest'
+                  sh 'cat Build/dockerfile | oc new-build -D - --name acetest${env.BUILD_ID}'
+                }
+              }
+          }
+	  stage("Start Build") 
+	{
+              steps 
+	      {
+                dir('MF_DEAStatements') 
+		{
+                  sh 'oc start-build acetest${env.BUILD_ID} --from-dir . --follow'
                 }
               }
           }
