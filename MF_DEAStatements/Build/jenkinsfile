@@ -35,7 +35,7 @@ pipeline {
 	      {
                 openshift.withProject('ace-sbsa')
 		{
-                  openshift.selector("all", [ build : 'acetest123' ]).delete() 
+                  openshift.selector("all", [ build : 'ace-demo' ]).delete() 
 		  if (openshift.selector("pods", 'ace-demo').exists()) 
 		  { 
                     openshift.selector("all", [ app : 'ace-demo' ]).delete() 
@@ -61,7 +61,7 @@ pipeline {
 	      {
                 dir('MF_DEAStatements') 
 		{
-                  sh 'oc start-build acetest123 --from-dir . --follow'
+                  sh 'oc start-build ace-demo --from-dir . --follow'
                 }
               }
           }
