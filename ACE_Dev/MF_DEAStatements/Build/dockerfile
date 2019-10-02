@@ -1,5 +1,7 @@
 FROM ibm-ace-server-prod:11.0.0.5-amd64
 
 COPY Bars/*.bar /home/aceuser/bars/
+
+COPY Override/* /home/aceuser/ace-server/overrides/
 EXPOSE 7002
 RUN ace_compile_bars.sh
