@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Baseline Ver: 1, First Release, Date 29/08/2014, Comments : First Release, SVN #   --><wsdl:definitions name="IBIDXService" targetNamespace="http://IDX.IBIDXService/V1" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:q1="http://IDX.FaultService/V1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://IDX.IBIDXService/V1" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedMXSD location="PS_DEA_StatementAdapterOutV1_0SendDEAStatementOrchAsynch_InlineSchema1.mxsd"/>
+        <generatedMXSD location="..\..\..\faultservice\idx\v1\PS_DEA_StatementAdapterOutV1_0SendDEAStatementOrchAsynch_InlineSchema2.mxsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://IDX.IBIDXService/V1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="PS_DEA_StatementAdapterOutV1_0SendDEAStatementOrchAsynch_InlineSchema1.mxsd"/>
+    </xs:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://IDX.FaultService/V1" xmlns:tns="http://IDX.FaultService/V1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="../../../faultservice/idx/v1/PS_DEA_StatementAdapterOutV1_0SendDEAStatementOrchAsynch_InlineSchema2.mxsd"/>
+    </xs:schema>
+	</wsdl:types>
+	<wsdl:message name="IIBIDXService_Submit_InputMessage">
+		<wsdl:part element="tns:Submit" name="parameters"/>
+		<wsdl:part element="tns:IDXHeader" name="IDXHeader"/>
+	</wsdl:message>
+	<wsdl:message name="IIBIDXService_Submit_OutputMessage">
+		<wsdl:part element="tns:SubmitResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="IBIDXRequest_Headers">
+		<wsdl:part element="tns:IDXHeader" name="IDXHeader"/>
+	</wsdl:message>
+	<wsdl:message name="IIBIDXService_Submit_IDXFaultFault_FaultMessage">
+		<wsdl:part element="q1:IDXFault" name="detail"/>
+	</wsdl:message>
+	<wsdl:portType name="PS_DEA_StatementAdapterOutV1">
+		<wsdl:operation name="SendDEAStatementOrchAsynch">
+			<wsdl:input message="tns:IIBIDXService_Submit_InputMessage" wsaw:Action="http://IDX.IBIDXService/IIBIDXService/Submit"/>
+		</wsdl:operation>
+	</wsdl:portType>
+</wsdl:definitions>
