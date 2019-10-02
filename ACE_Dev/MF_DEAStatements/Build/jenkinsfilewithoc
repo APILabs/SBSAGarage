@@ -1,0 +1,59 @@
+pipeline {
+    agent any
+    stages
+     {
+        stage('pull from git')
+        {
+        	steps {
+            	checkout([
+                       $class: 'GitSCM',
+                       branches: [[name: '*/master']],
+                       extensions: scm.extensions + [[$class: 'LocalBranch'], [$class: 'WipeWorkspace']],
+                       userRemoteConfigs: [[credentialsId: 'githubcredid', url: 'https://github.com/APILabs/SBSAGarage.git']],
+                      
+               		])
+               	}
+        }
+        stage('Set Docker Env') 
+        {
+                steps {
+                    echo 'Starting to build docker image'
+                    script {
+                        def dockerfile = 'dockerfile'
+                        def customImage = docker.build("${env.APP_NAME}:${env.BUILD_ID}", "-f ./${env.PROJECT_NAME}/Build/${dockerfile} ./${env.PROJECT_NAME}")           
+                        }
+                    }
+        }
+	stage('Push image to OC') 
+        {
+                steps {
+                    echo 'Tag the image and push to OC'
+
+                        // login to docker registry on openshift cluster
+			//sh export user = ${oc whoami}
+			//sh export pwd =  ${oc whoami -t}
+		  sh """
+		  	oc login  ${env.OC_CLUSTER} --insecure-skip-tls-verify -u system -p adasdasd
+			docker login -u system -p ${env.AUTH_TOKEN} ${env.DOCKER_REGISTRY}
+                        docker tag ${env.APP_NAME}:${env.BUILD_ID} ${env.DOCKER_REGISTRY}/${env.OC_PROJECT}/${env.APP_NAME}:${env.BUILD_ID}
+                        docker push ${env.DOCKER_REGISTRY}/${env.OC_PROJECT}/${env.APP_NAME}:${env.BUILD_ID}
+                    """
+                    }
+        }
+	stage('Run App') 
+    	{
+	    steps {
+		sh """
+		    oc project ${env.OC_PROJECT}
+		    oc new-app ${env.APP_NAME}:$BUILD_ID -e LICENSE=accept
+		    oc expose service ${env.APP_NAME} --name=${env.APP_NAME}-webui --port=7600 --generator="route/v1"
+		    oc expose service ${env.APP_NAME} --name=${env.APP_NAME}-http --port=7800 --generator="route/v1"
+		    echo '************** hostname to access the webui*************' 
+		    oc get route ${env.APP_NAME}-http -o=go-template='{{ .spec.host}}'
+		    echo '************** hostname to access the webui*************' 
+		    oc get route ${env.APP_NAME}-webui -o=go-template='{{ .spec.host}}'
+         	"""
+	    }
+    	}
+    }
+}
