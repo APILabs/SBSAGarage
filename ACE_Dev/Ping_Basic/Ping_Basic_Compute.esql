@@ -6,13 +6,14 @@ CREATE COMPUTE MODULE Ping_Basic_Compute
 		-- CALL CopyMessageHeaders();
 		-- CALL CopyEntireMessage();
 		
-		Set OutputRoot.JSON.Data.pingbasic.Server = ExecutionGroupLabel; 
-		Set OutputRoot.JSON.Data.pingbasic.WorkPath = WorkPath;
-		set OutputRoot.JSON.Data.pingbasic.MsgFlow = MessageFlowLabel;
-		set OutputRoot.JSON.Data.pingbasic.ProcessId = ProcessId;
-		set OutputRoot.JSON.Data.pingbasic.BrokerVersion = BrokerVersion;
- 		set OutputRoot.JSON.Data.pingbasic.DateTime = CURRENT_TIMESTAMP;
- 		set OutputRoot.JSON.Data.pingbasic.TimeZone = LOCAL_TIMEZONE;
+			Set OutputRoot.JSON.Data.pingbasic.Server = ExecutionGroupLabel; 
+			Set OutputRoot.JSON.Data.pingbasic.WorkPath = WorkPath;
+			set OutputRoot.JSON.Data.pingbasic.MsgFlow = MessageFlowLabel;
+			set OutputRoot.JSON.Data.pingbasic.ProcessId = ProcessId;
+			set OutputRoot.JSON.Data.pingbasic.BrokerVersion = BrokerVersion;
+	 		set OutputRoot.JSON.Data.pingbasic.DateTime = CURRENT_TIMESTAMP;
+	 		set OutputRoot.JSON.Data.pingbasic.TimeZone = LOCAL_TIMEZONE;
+			
 		RETURN TRUE;
 	END;
 
