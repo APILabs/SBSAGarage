@@ -4,77 +4,60 @@ def appName = 'ace-demo'
 def projectName = 'ace-sbsa'
 pipeline {
     agent any
-    stages
-     {
-        stage('Build Ant')
-        {
+    stages{
+        stage('Build Ant'){
            steps {
-                withAnt(installation: 'antlocal')
-                {
+                withAnt(installation: 'antlocal') {
                         sh "ant -buildfile ./ACE_Dev/MF_DEAStatements/Build/build.xml"
                 }
             }
 
         }
-        stage('cleanup')
-        {
-          steps
-          {
-            script
-            {
-              openshift.withCluster('mycluster')
-              {
-                openshift.withProject(projectName)
-                {
-                  openshift.selector("all", [ build : appName ]).delete()
-                  if (openshift.selector("pods", [ app : appName ]).exists())
-                  {
-                    openshift.selector("all", [ app : appName ]).delete()
+        stage('cleanup') {
+          steps{
+            script {
+              openshift.withCluster('mycluster'){
+               openshift.withCredentials('id-token-client') {
+                    openshift.withProject(projectName)
+                    {
+                      openshift.selector("all", [ build : appName ]).delete()
+                      if (openshift.selector("pods", [ app : appName ]).exists())
+                      {
+                        openshift.selector("all", [ app : appName ]).delete()
+                      }
+                    }
                   }
-                }
               }
             }
           }
         }
-        stage("Build Image")
-        {
-              steps
-              {
-                dir(env/srcfolder)
-                {
+        stage("Build Image") {
+              steps{
+                dir(env/srcfolder){
                   sh "cat Build/dockerfile | oc new-build -D - --name  ${appName}"
                 }
               }
           }
-          stage("Start Build")
-        {
-              steps
-              {
-                dir(env/srcfolder)
-                {
+          stage("Start Build") {
+              steps{
+                dir(env/srcfolder){
                   sh "oc start-build ${appName} --from-dir . --follow"
                 }
               }
           }
           stage('Run')
           {
-          steps
-          {
-            script
-            {
-              openshift.withCluster('mycluster')
-              {
-                openshift.withProject(projectName)
-                {
+          steps{
+            script {
+              openshift.withCluster('mycluster'){
+                openshift.withProject(projectName) {
                    def created = openshift.newApp( "${appName}:latest", '-e LICENSE=accept -e ACE_SERVER_NAME=ACESERVER' , "--name=${appName}")
                    echo "new-app created ${created.count()} objects named: ${created.names()}"
                    created.describe()
 
                    def rm = openshift.selector("dc", appName).rollout()
-                   timeout(2)
-                   {
-                      openshift.selector("dc", appName).related('pods').untilEach(1)
-                        {
+                   timeout(2){
+                      openshift.selector("dc", appName).related('pods').untilEach(1) {
                           return (it.object().status.phase == "Running")
                         }
                   }
