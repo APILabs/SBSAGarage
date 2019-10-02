@@ -16,8 +16,7 @@ pipeline {
         stage('cleanup') {
           steps{
             script {
-              openshift.withCluster('mycluster'){
-               openshift.withCredentials('id-token-client') {
+              openshift.withCluster('mycluster', 'id-token-client'){
                     openshift.withProject(projectName)
                     {
                       openshift.selector("all", [ build : appName ]).delete()
@@ -26,7 +25,6 @@ pipeline {
                         openshift.selector("all", [ app : appName ]).delete()
                       }
                     }
-                  }
               }
             }
           }
