@@ -1,6 +1,6 @@
 def env = 'ACE_Dev'
 def srcfolder = 'MF_DEAStatements'
-def laststable = '46'
+def laststable = '48'
 def laststableapp = 'ace-demo-'+ "${laststable}"
 def appName = 'ace-demo-'+ "${BUILD_ID}"
 def projectName = 'ace-sbsa'
@@ -73,7 +73,8 @@ pipeline {
                       openshift.selector("all", [ build : laststableapp ]).delete()
                       if (openshift.selector("pods", [ app : laststableapp ]).exists())
                       {
-                        openshift.selector("all", [ app : laststableapp ]).delete()
+                       def deleted =  openshift.selector("all", [ app : laststableapp ]).delete()
+                       deleted.describe()
                       }
                     }
               }
