@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<msgCoreModel:MRMessageSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:MSGModel="http://www.ibm.com/msgmodel/2003/MSGModel" xmlns:msgCoreModel="http://www.ibm.com/msgmodel/2003/MSGCoreModel" name="MS_DEAStatementsV1_0_Provide" parserDomain="XMLNSC" msetVersionNo="" currentMessageSetId="//@MRMessageSetID.0">
+<msgCoreModel:MRMessageSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:MSGModel="http://www.ibm.com/msgmodel/2003/MSGModel" xmlns:msgCoreModel="http://www.ibm.com/msgmodel/2003/MSGCoreModel" name="MS_DEAStatementsV1_0_Provide" parserDomain="XMLNSC" msetVersionNo="" currentMessageSetId="//%">
   <MRMessageSetRep xsi:type="MSGModel:MRXMLMessageSetRep" name="XML1" timeZoneID="0" allowLenientDateTimes="false" suppressDOCTYPE="true" doctypeSystemID="www.mrmnames.net/OSEHCEC002001" doctypePublicID="OSEHCEC002001" rootTagName=""/>
   <MRMessageSetID repositoryId="-298177421" messageSetId="1"/>
   <otherSupportedDomains parserDomain="SOAP"/>
   <otherSupportedDomains parserDomain="MRM"/>
+  <otherSupportedDomains parserDomain="XMLNS"/>
 </msgCoreModel:MRMessageSet>
