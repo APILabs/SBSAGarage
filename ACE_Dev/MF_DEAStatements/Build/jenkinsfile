@@ -1,7 +1,7 @@
 def env = 'ACE_Dev'
 def srcfolder = 'MF_DEAStatements'
 def laststable = '43'
-def appName = 'ace-demo-'+ "${env.BUILD_ID}"
+def appName = 'ace-demo-'+ "${BUILD_ID}"
 def projectName = 'ace-sbsa'
 pipeline {
     agent any
