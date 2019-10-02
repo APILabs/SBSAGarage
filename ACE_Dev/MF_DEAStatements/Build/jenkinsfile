@@ -70,10 +70,10 @@ pipeline {
               openshift.withCluster('mycluster', 'id-token-client'){
                     openshift.withProject(projectName)
                     {
-                      openshift.selector("all", [ build : appName ]).delete()
-                      if (openshift.selector("pods", [ app : appName ]).exists())
+                      openshift.selector("all", [ build : laststableapp ]).delete()
+                      if (openshift.selector("pods", [ app : laststableapp ]).exists())
                       {
-                        openshift.selector("all", [ app : appName ]).delete()
+                        openshift.selector("all", [ app : laststableapp ]).delete()
                       }
                     }
               }
