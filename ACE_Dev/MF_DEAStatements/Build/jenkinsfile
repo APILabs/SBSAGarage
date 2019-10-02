@@ -1,111 +1,101 @@
-def srcfolder = 'MF_DEAStatements' 
-def appName = 'ace-demo' 
-def projectName = 'ace-sbsa' 
+def env = 'ACE_Dev'
+def srcfolder = 'MF_DEAStatements'
+def appName = 'ace-demo'
+def projectName = 'ace-sbsa'
 pipeline {
     agent any
     stages
      {
-        stage('pull from git')
-        {
-        	steps {
-            	checkout([
-                       $class: 'GitSCM',
-                       branches: [[name: '*/master']],
-                       extensions: scm.extensions + [[$class: 'LocalBranch'], [$class: 'WipeWorkspace']],
-                       userRemoteConfigs: [[credentialsId: 'githubcredid', url: 'https://github.com/APILabs/SBSAGarage.git']],
-               		])
-               	}
-        }
         stage('Build Ant')
         {
            steps {
-            	withAnt(installation: 'antlocal') 
-		{
-			sh "ant -buildfile ./${env.PROJECT_NAME}/Build/build.xml"
-		}
+                withAnt(installation: 'antlocal')
+                {
+                        sh "ant -buildfile ./ACE_Dev/MF_DEAStatements/Build/build.xml"
+                }
             }
-				
+
         }
-	stage('cleanup') 
-	{
-      	  steps 
-	  {
-            script 
-	    {
-              openshift.withCluster('mycluster') 
-	      {
-                openshift.withProject('ace-sbsa')
-		{
-                  openshift.selector("all", [ build : 'ace-demo' ]).delete() 
-		  if (openshift.selector("pods", [ app : 'ace-demo' ]).exists()) 
-		  { 
-                    openshift.selector("all", [ app : 'ace-demo' ]).delete() 
+        stage('cleanup')
+        {
+          steps
+          {
+            script
+            {
+              openshift.withCluster('mycluster')
+              {
+                openshift.withProject(projectName)
+                {
+                  openshift.selector("all", [ build : appName ]).delete()
+                  if (openshift.selector("pods", [ app : appName ]).exists())
+                  {
+                    openshift.selector("all", [ app : appName ]).delete()
                   }
                 }
               }
             }
           }
         }
-	stage("Build Image") 
-	{
-              steps 
-	      {
-                dir('MF_DEAStatements') 
-		{
-                  sh 'cat Build/dockerfile | oc new-build -D - --name ace-demo'
+        stage("Build Image")
+        {
+              steps
+              {
+                dir(env/srcfolder)
+                {
+                  sh "cat Build/dockerfile | oc new-build -D - --name  ${appName}"
                 }
               }
           }
-	  stage("Start Build") 
-	{
-              steps 
-	      {
-                dir('MF_DEAStatements') 
-		{
-                  sh 'oc start-build ace-demo --from-dir . --follow'
+          stage("Start Build")
+        {
+              steps
+              {
+                dir(env/srcfolder)
+                {
+                  sh "oc start-build ${appName} --from-dir . --follow"
                 }
               }
           }
-	  stage('Run') 
-	  {
-      	  steps 
-	  {
-            script 
-	    {
-              openshift.withCluster('mycluster') 
-	      {
-                openshift.withProject('ace-sbsa')
-		{
-                   def created = openshift.newApp( 'ace-demo:latest', '-e LICENSE=accept -e ACE_SERVER_NAME=ACESERVER' , '--name=ace-demo')
-		   echo "new-app created ${created.count()} objects named: ${created.names()}"
-        	   created.describe()
-		   
-		   def rm = openshift.selector("dc", 'ace-demo').rollout()
-                   timeout(2) 
-		   { 
-		      openshift.selector("dc", 'ace-demo').related('pods').untilEach(1) 
-			{
-			  return (it.object().status.phase == "Running")
-			}
+          stage('Run')
+          {
+          steps
+          {
+            script
+            {
+              openshift.withCluster('mycluster')
+              {
+                openshift.withProject(projectName)
+                {
+                   def created = openshift.newApp( "${appName}:latest", '-e LICENSE=accept -e ACE_SERVER_NAME=ACESERVER' , "--name=${appName}")
+                   echo "new-app created ${created.count()} objects named: ${created.names()}"
+                   created.describe()
+
+                   def rm = openshift.selector("dc", appName).rollout()
+                   timeout(2)
+                   {
+                      openshift.selector("dc", appName).related('pods').untilEach(1)
+                        {
+                          return (it.object().status.phase == "Running")
+                        }
                   }
-		}
+                }
               }
             }
           }
         }
-	stage('Expose App') 
-    	{
-	    steps {
-		sh """
-		    oc expose service ${env.APP_NAME} --name=${env.APP_NAME}-webui --port=7600 --generator="route/v1"
-		    oc expose service ${env.APP_NAME} --name=${env.APP_NAME}-http --port=7800 --generator="route/v1"
-		  
-		    echo '************** hostname to access the webui*************' 
-		    oc get route ${env.APP_NAME}-http -o=go-template='{{ .spec.host}}'
-		    echo '************** hostname to access the webui*************' 
-		    oc get route ${env.APP_NAME}-webui -o=go-template='{{ .spec.host}}'
-		  """  
-	    }
-	}
+        stage('Expose App')
+        {
+            steps {
+                sh """
+                    oc expose service ${appName} --name=${appName}-webui --port=7600 --generator="route/v1"
+                    oc expose service ${appName} --name=${appName}-http --port=7800 --generator="route/v1"
+
+                    echo '************** hostname to access the webui*************'
+                    oc get route ${appName}-http -o=go-template='{{ .spec.host}}'
+                    echo '************** hostname to access the webui*************'
+                    oc get route ${appName}-webui -o=go-template='{{ .spec.host}}'
+                  """
+            }
+        }
     }
 }
