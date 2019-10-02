@@ -1,6 +1,7 @@
 def env = 'ACE_Dev'
 def srcfolder = 'MF_DEAStatements'
 def laststable = '43'
+def laststableapp = 'ace-demo-'+ "${laststable}"
 def appName = 'ace-demo-'+ "${BUILD_ID}"
 def projectName = 'ace-sbsa'
 pipeline {
@@ -13,22 +14,6 @@ pipeline {
                 }
             }
 
-        }
-        stage('cleanup') {
-          steps{
-            script {
-              openshift.withCluster('mycluster', 'id-token-client'){
-                    openshift.withProject(projectName)
-                    {
-                      openshift.selector("all", [ build : appName ]).delete()
-                      if (openshift.selector("pods", [ app : appName ]).exists())
-                      {
-                        openshift.selector("all", [ app : appName ]).delete()
-                      }
-                    }
-              }
-            }
-          }
         }
         stage("Build Image") {
               steps{
@@ -78,6 +63,22 @@ pipeline {
                     oc get route ${appName}-webui -o=go-template='{{ .spec.host}}'
                   """
             }
+        }
+        stage('cleanup') {
+          steps{
+            script {
+              openshift.withCluster('mycluster', 'id-token-client'){
+                    openshift.withProject(projectName)
+                    {
+                      openshift.selector("all", [ build : appName ]).delete()
+                      if (openshift.selector("pods", [ app : appName ]).exists())
+                      {
+                        openshift.selector("all", [ app : appName ]).delete()
+                      }
+                    }
+              }
+            }
+          }
         }
     }
 }
