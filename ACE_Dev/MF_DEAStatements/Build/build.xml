@@ -6,7 +6,7 @@
    <property name="project.name" value="MF_DEAStatements" />
    <property name="toolkit.home" value="/opt/ibm/ace-11/tools" />
    <property name="ant.bars.basedir" value="${workspace.dir}/${project.name}/Bars" />
-    <property name="bar.name" value="${ant.bars.basedir}/DEAStatement.bar" />
+    <property name="bar.name" value="${ant.bars.basedir}/DEAStatements.bar" />
     <antcall target="build" />
   </target>
   <target name="build">
