@@ -31,14 +31,14 @@ pipeline {
         }
         stage("Build Image") {
               steps{
-                dir(env/srcfolder){
+                dir('ACE_Dev/MF_DEAStatements'){
                   sh "cat Build/dockerfile | oc new-build -D - --name  ${appName}"
                 }
               }
           }
           stage("Start Build") {
               steps{
-                dir(env/srcfolder){
+                dir('ACE_Dev/MF_DEAStatements'){
                   sh "oc start-build ${appName} --from-dir . --follow"
                 }
               }
