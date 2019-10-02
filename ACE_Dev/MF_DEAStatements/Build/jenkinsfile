@@ -11,7 +11,7 @@ pipeline {
            steps {
                 withAnt(installation: 'antlocal')
                 {
-                        sh "ant -buildfile ./${env.PROJECT_NAME}/Build/build.xml"
+                        sh "ant -buildfile .${env}/${env.PROJECT_NAME}/Build/build.xml"
                 }
             }
 
@@ -40,7 +40,7 @@ pipeline {
         {
               steps
               {
-                dir(srcfolder)
+                dir(env/srcfolder)
                 {
                   sh "cat Build/dockerfile | oc new-build -D - --name  ${appName}"
                 }
@@ -50,7 +50,7 @@ pipeline {
         {
               steps
               {
-                dir(srcfolder)
+                dir(env/srcfolder)
                 {
                   sh "oc start-build ${appName} --from-dir . --follow"
                 }
