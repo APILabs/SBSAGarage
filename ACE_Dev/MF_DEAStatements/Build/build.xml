@@ -5,7 +5,7 @@
    <property name="workspace.dir" value="/var/jenkins_home/workspace/${env.JOB_NAME}" />
    <property name="project.name" value="MF_DEAStatements" />
    <property name="toolkit.home" value="/opt/ibm/ace-11/tools" />
-   <property name="ant.bars.basedir" value="${workspace.dir}/${project.name}/Bars" />
+   <property name="ant.bars.basedir" value="${workspace.dir}/ACE_Dev/${project.name}/Bars" />
     <property name="bar.name" value="${ant.bars.basedir}/DEAStatements.bar" />
     <antcall target="build" />
   </target>
