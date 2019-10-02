@@ -11,7 +11,7 @@ pipeline {
            steps {
                 withAnt(installation: 'antlocal')
                 {
-                        sh "ant -buildfile .${env}/${env.PROJECT_NAME}/Build/build.xml"
+                        sh "ant -buildfile ./ACE_Dev/MF_DEAStatements/Build/build.xml"
                 }
             }
 
