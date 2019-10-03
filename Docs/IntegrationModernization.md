@@ -46,6 +46,7 @@ c.	Connect to the toolkit  localhost:7600
 ```
 Reference Link : https://developer.ibm.com/integration/docs/app-connect-enterprise/get-started/
 	
+##
 
 ## Docker Environment : default image
 
@@ -233,18 +234,20 @@ Note : If you want to connect to the DB from another container , you need to use
             }
 ```
 
-Docker Environment:  Configure DB2 cli and build a docker file for app connect
+## Docker Environment:  Configure DB2 cli and build a docker file for app connect
 
- Pre-Requisites:
+## Pre-Requisites:
 1.	Docker installation
 2.	Download/clone git repository
 3.	ODBC cli drivers and libraries
 4.	Base image of app connect enterprise from docker hub or pre-built image.
 5.	Set up the initial-config directory based on the previous steps.
 
-Objective: Use a custom docker file to build an app connect enterprise image with db2 cli configurations to create an immutable copy.
 
-Steps:
+## Objective: Use a custom docker file to build an app connect enterprise image with db2 cli configurations to create an immutable copy.
+
+
+## Steps:
 
 1.	Pull the public ibmcom/ace image from docker hub  docker pull ibcom/ace or pre-build the ace image by following the steps of the previous section.
 2.	Create a new directory : ace-db2
@@ -454,17 +457,19 @@ BIP8270I: Connected to Datasource 'SAMPLE' as user 'db2inst1'. The datasource pl
 
 ```
 
-Openshift Environment:  
 
-Pre-Requisites:
+## Openshift Environment:  
+
+
+## Pre-Requisites:
 1.	Openshift cli  installation : https://www.tutorialspoint.com/openshift/openshift_cli.htm. Install the appropriate binary for the OC on the below link https://github.com/openshift/origin/releases/tag/v3.6.0-alpha.2
 2.	Openshift user and cluster details
 
-Clusterurl	
-Username	
-Password	
-Project	
-Docker url	
+		##  Clusterurl	
+		##  Username	
+		## Password	
+		## Project	
+		## Docker url	
 
 3.	Download/clone git repository : https://github.com/ot4i/ace-docker
 4.	Base image of app connect enterprise from docker hub . 
