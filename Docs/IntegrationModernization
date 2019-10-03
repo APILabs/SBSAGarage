@@ -1,0 +1,202 @@
+
+The below steps will guide you through the process of starting the app connect enterprise journey from the local system , then into the container and then finally into an open shift Kubernetes cluster. 
+
+Local System :
+Pre-Requisites:
+1.	App connect enterprise toolkit
+
+Objective: Get started with app connect integration on the local environment.  Connect to the app connect Integration server via the toolkit , enable debug , deploy and test an application. 
+
+Steps:
+1.	Download the ace 11.0.0.x binary based on the platform and install it.
+For Windows – chose your preferred directory to install it, else choose the standard folder - C:\Program Files\IBM\ACE\11.0.0.x
+For Linux – Untar the download in any preferred location.
+2.	Create a workdirectory : You need to create a work directory for ace. This will create the necessary folder structure and the serverconf.yaml file that consists of all the default settings.
+3.	Deep dive on the serverconf.yaml properties in the file: 
+a.	RestAdminListener:
+ port: 7610    This is the port to connect to in the toolkit and for the integration server webui.
+b.	ResourceManagers	
+  JVM:
+   jvmDebugPort : 9998  This it to enable the debug port. If this is not configured initially, you will have to stop the integration server to configure it.    
+c.	admin Security  This is to enable security for the webui
+  Authentication
+  basicAuth: true  
+  adminSecurity: 'active/inactive’  
+  authMode: 'file'
+d.	HTTPConnector: 
+    #ListenerPort: 0      Default is 7800. Configure this value to change the default port. 
+    #CORSEnabled: false  Set this to true to enable REST and cors support.
+e.	  HTTPSConnector:
+    #ListenerPort: 0   Default is 7843. Configure this value to change the default port. 
+
+    #CORSEnabled: false Set this to true to enable REST and cors support.
+
+4.	Start the integration server :
+Before you start the integration server, you need to set the profile
+Commands : 
+a.	Set profile   . ./mqsiprofile
+b.	Start the server IntegrationServer --name ISIPL101 --work-dir c:\mywrk\myaceworkdir
+c.	Connect to the toolkit  localhost:7600
+
+Reference Link : https://developer.ibm.com/integration/docs/app-connect-enterprise/get-started/
+	
+Docker Environment : default image 
+Pre-Requisites:
+1.	Docker installation
+2.	Docker hub login details
+3.	ACE binary - ace-11.0.0.5.tar.gz
+
+Objective: Configure an App Connect Enterprise integration server on the docker environment. Build your own image of app connect enterprise. Connect to the integration server via the toolkit. 
+
+Steps:
+
+1)	Clone or download the below repository :  https://github.com/ot4i/ace-docker.git
+2)	Download a copy of App Connect Enterprise (ie. ace-11.0.0.5.tar.gz) and place it in the deps folder.
+3)	Folder structure
+Ace-docker-master 
+ Deps  ace-11.0.0.5.tar.gz
+ ubi  dockerfile.acemq ( docker file to build ace + mq server)
+             dockerfile.aceonly ( docker file to build ace)
+             dockerfile.mqclient ( docker file to build ace + mq client)
+
+4)	Build the docker image with the below commands :
+
+Standalone Ace integration server : 
+Command : folder  ace-docker-master: 
+docker build -t ace-only --build-arg ACE_INSTALL=IBM_ACE_11.0.0.4_LNX_X8664_INCTKT.tar.gz --file ubi/Dockerfile.aceonly .
+
+This will create a docker image with image name “ace-only” with tag “latest”. Confirm by running “docker images” to view the newly built image.
+
+5)	Run the docker image to start an ace integration server container.
+
+Command : docker run --name aceserver -p 7600:7600 -p 7800:7800 -p 7843:7843 --env LICENSE=accept --env ACE_SERVER_NAME=ACESERVER ace-only:latest
+
+6)	Confirm that the integration server container is running – “docker ps”.  If you don’t see any entry, run “docker ps -a” to see if the container started but crashed and didn’t start. If it is running , try connecting to the running integration server using the webui – http://localhost:7600 or using the toolkit.
+
+7)	To view the details of a running container :  Exec into the container and view the existing configuration. 
+“docker exec -it <container_id>  /bin/bash”
+Navigate to path /home/aceuser/aceserver to view the running configurations of the integration server.
+Docker Environment : custom configuration
+
+Pre-Requisites:
+1.	Docker installation
+2.	Download/clone git repository
+3.	ACE binary - ace-11.0.0.5.tar.gz
+
+Objective: Usage of mounts in docker and then using .ounts to inject custom configuration into the ace integration server container. 
+
+Steps:
+1.	Clone or download the below repository :  https://github.com/ot4i/ace-docker.git
+2.	Pull the public ibmcom/ace image from docker hub  docker pull ibcom/ace or pre-build the ace image by following the steps of the previous section.
+3.	Navigate to the folder : ace-docker-mastersample  initial-config. This folder has sub folders of different configurations. Example : webusers, serverconf. 
+a.	For each sub folder that is there in the “initial-config” folder, a script corresponding to that directory is run at start-up of the container. Only keep those folders where you want to add custom configuration.
+b.	Note:  Do not keep empty folders. This will cause the scripts to fail at start-up and the integration server will not start.
+
+serverconf  	ace_config_serverconf.sh
+webusers	ace_config_webusers.sh
+	Example Config : 
+	
+	 
+
+4.	Once you have updated the files with custom configurations run the below command to start the integration server by using mounts to inject custom configuration into the ace container. Mount the initial config folder into the container on start up by running the below command.
+
+docker run --name aceapp -p 7600:7600 -p 7800:7800 -p 7843:7843 --env LICENSE=accept --env ACE_SERVER_NAME=ACESERVER --mount type=bind,src=/{path to repo}/sample/initial-config,dst=/home/aceuser/initial-config --env ACE_TRUSTSTORE_PASSWORD=truststorepwd --env ACE_KEYSTORE_PASSWORD=keystorepwd aceapp:latest
+
+5.	To make any changes after running, first change the config on the local system and then stop and restart the container for the changes to get updated.
+
+Docker Environment:  Custom Build with application 
+
+Pre-Requisites:
+1.	Docker installation
+2.	Download/clone git repository
+3.	Base image of app connect enterprise from docker hub or pre-built image.
+4.	Bar file of application. Start with a simple application that does not have dependeny with MQ as this requires an MQ policy to deploy successfully.
+5.	Set up the initial-config directory based on the previous steps.
+
+
+Objective: Use a custom docker file to build an app connect enterprise image with application bar file and configuration to create an immutable copy.
+
+Steps:
+
+1.	Clone or download the below repository :  https://github.com/ot4i/ace-docker.git
+2.	Pull the public ibmcom/ace image from docker hub  docker pull ibcom/ace or pre-build the ace image by following the steps of the previous section.
+3.	Navigate to the folder  ace-docker-master sample. 
+4.	Place the application bar files in the folder “bars_aceonly”
+
+5.	View the dockerfile under the sample folder – dockerfile.aceonly
+
+
+ 
+
+6.	Build a custom integration server image with the application bar file by running the below command 
+docker build -t aceapp --file Dockerfile.aceonly .
+This command creates a new image with the image name – “aceapp” with the tag “latest”. Confirm the image created by running “docker images”
+7.	If the initial-config directory config is not updated before, follow the steps mentioned in the previous section.
+8.	Run the image to create an integration server with the pre-build application and custom configuration by running the below command 
+docker run --name aceapp -p 7600:7600 -p 7800:7800 -p 7843:7843 --env LICENSE=accept --env ACE_SERVER_NAME=ACESERVER --mount type=bind,src=/{path to repo}/sample/initial-config,dst=/home/aceuser/initial-config --env ACE_TRUSTSTORE_PASSWORD=truststorepwd --env ACE_KEYSTORE_PASSWORD=keystorepwd aceapp:latest
+
+9.	Confirm that the application is running –“docker ps”
+
+
+Openshift Environment:  
+
+Pre-Requisites:
+1.	Openshift cli  installation : https://www.tutorialspoint.com/openshift/openshift_cli.htm. Install the appropriate binary for the OC on the below link https://github.com/openshift/origin/releases/tag/v3.6.0-alpha.2
+2.	Openshift user and cluster details
+
+Clusterurl	
+Username	
+Password	
+Project	
+Docker url	
+
+3.	Download/clone git repository : https://github.com/ot4i/ace-docker
+4.	Base image of app connect enterprise from docker hub . 
+Command:  docker pull ibmcom/ace:latest
+
+
+Objective: To login to the open shift cluster and push the images from the local system.
+
+
+
+1)	Login to the open shift cluster and login to the docker registry on openshift.
+
+
+oc login cluster_url --insecure-skip-tls-verify -u username -p password
+
+docker login -u $(oc whoami) -p $(oc whoami -t) docker registry 
+
+
+2)	Create a new project on openshift or select the appropriate openshift project
+
+oc new-project ace-dev
+
+3)	Tag the image and push the image to the open shift cluster
+
+docker tag ace-app:$BUILD_ID docker-registry-default.40.68.250.242.nip.io/ace-sbsa/ace_dea:$BUILD_ID
+
+docker push  docker-registry-default.40.68.250.242.nip.io/ace- sbsa/ace_dea:$BUILD_ID
+
+4)	Start an IS on open shift cluster and open routes
+
+oc project ace-sbsa
+
+oc new-app ace_dea:$BUILD_ID -e LICENSE=accept -e ACE_SERVER_NAME=ACESERVER
+
+5)	Expose the application service by creating a route on open shift cluster.
+
+oc expose service acedea --name=acedea-webui --port=7600 --generator="route/v1"
+oc expose service acedea --name=acedea-http --port=7800 --generator="route/v1"
+
+6)	Get the hostname of the routes by running the below commands
+
+I.	Host for the http listener of the integration server – oc get route acedea-http -o=go-template='{{ .spec.host}}'
+II.	Host for the webui of the integration server – oc get route acedea-webui -o=go-template='{{ .spec.host}}'
+
+
+In case the pods don’t start, do the following steps :
+
+1.	oc adm policy add-scc-to-user anyuid -z default
+ securitycontextconstraints.security.openshift.io/privileged added to: ["system:serviceaccount:test:default"]
+
+2.	oc patch dc/<dc-name> --patch '{"spec":{"template":{"spec":{"serviceAccountName": "default"}}}}' -n <project-name>
