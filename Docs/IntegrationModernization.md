@@ -99,7 +99,7 @@ Navigate to path /home/aceuser/aceserver to view the running configurations of t
 2.	Download/clone git repository
 3.	ACE binary - ace-11.0.0.5.tar.gz
 
-## Objective: Usage of mounts in docker and then using .ounts to inject custom configuration into the ace integration server container. 
+## Objective: Usage of mounts in docker and then using mounts to inject custom configuration into the ace integration server container. 
 
 ## Steps:
 
