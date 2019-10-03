@@ -237,27 +237,42 @@ Steps:
 3.	Download the db2clijar files for linux. Link : https://www.ibm.com/support/pages/download-initial-version-115-clients-and-drivers and keep the tar file in the dir ace-db2
 4.	Create a new docker file with the below details 
      Filename : dockerfile.acedb2
+     
+ ```    
+from ibmcom/ace:latest
+
+USER root
+RUN echo $PWD
+
+RUN mkdir -p /home/aceuser/db2cli_odbc_driver
+COPY ibm_data_server_driver_for_odbc_cli_linuxx64_v11.5.tar.gz /home/aceuser/db2cli_odbc_driver
+WORKDIR /home/aceuser/db2cli_odbc_driver
+RUN echo $PWD
+RUN tar -xvzf ibm_data_server_driver_for_odbc_cli_linuxx64_v11.5.tar.gz
+
+USER aceuser
+
+#COPY odbc.ini /home/aceuser/ace-server/odbc.ini
+#COPY odbcinst.ini /var/mqsi/odbc/odbcinst.ini
+#COPY db2cli.ini /var/mqsi/odbc/db2cli.ini
+
+ENV ODBCINI /home/aceuser/ace-server/odbc.ini
+ENV ODBCSYSINI /home/aceuser/initial-config/odbcini/
+ENV DB2CLIINIPATH /home/aceuser/initial-config/odbcini/
+ENV LD_LIBRARY_PATH /home/aceuser/db2cli_odbc_driver/odbc_cli/clidriver/lib
+ENV IE02_PATH=/opt/IBM/ace-11.0.0.5/ie02
+WORKDIR /home/aceuser
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+```
 
 
 5.	Create a folder structure called initial-config/odbcini and place the below files under ace-db2/initial-config/odbcini
 
 The below configs in the ini files are to connect to the local docker db2 container that was created in the earlier step.
 a.	Db2cli.ini
-
+```
 [SAMPLE]
 Database=SAMPLE
 Protocol=TCPIP
@@ -268,11 +283,11 @@ pwd=passw0rd
 autocommit=0
 TableType=“‘TABLE’,‘VIEW’,‘SYSTEM TABLE’”
 
-
+```
 
 
 b.	Odbc.ini
-
+```
 ;#######################################
 ;#### List of data sources stanza ######
 ;#######################################
@@ -294,9 +309,9 @@ InstallDir=/opt/ibm/ace-11/server/ODBC/drivers
 UseCursorLib=0
 IANAAppCodePage=4
 UNICODE=UTF-8
-
+```
 c.	Odbcinst.ini
-
+```
 ;##########################################################################
 ;# ODBC database driver manager system initialisation file.               #
 ;##########################################################################
@@ -317,7 +332,7 @@ c.	Odbcinst.ini
 Trace=no
 TraceFile=<A Directory with plenty of free space to hold trace output>/odbctrace.out
 Threading=2
-
+```
 
 6.	The folder structure and contents should be as below:
 
@@ -325,7 +340,7 @@ Threading=2
 
 
 7.	Navigate to the ace-db2 path in the command line and run the below command to build the docker image. Note the last “.”
-
+```
 docker build -t ace-db2:latest --file dockerfile.acedb2 .
 
 Sending build context to Docker daemon   34.6MB
@@ -399,11 +414,11 @@ Removing intermediate container b4308ba8aace
 Successfully built dda891f92da4
 Successfully tagged ace-db2:latest
 
-
+```
 8.	Once the image has been built run the below command to start the container and mount the initial-config folder into the container.
-
+```
 docker run --name acedb2 -p 7600:7600 -p 7800:7800 -p 7843:7843 --env LICENSE=accept --env ACE_SERVER_NAME=ACESERVER --mount type=bind,src=/{path} /ace-db2/initial-config,dst=/home/aceuser/initial-config ace-db2:latest
-
+```
 9.	Once the container has started exec into the container to set test the connectivity.
 Docker exec -it <container-id> /bin/bash
 
@@ -411,21 +426,19 @@ Docker exec -it <container-id> /bin/bash
 Command :  “. ./mqsiprofile”
 
 
-11.	As we haven’t injected the dbparms into the container, set it with the below Command   “mqsisetdbparms -w /home/aceuser/ace-server -n SAMPLE -u db2inst1 -p passw0rd”
-
+11.	As we haven’t injected the dbparms into the container, set it with the below 
+```
+Command   “mqsisetdbparms -w /home/aceuser/ace-server -n SAMPLE -u db2inst1 -p passw0rd”
+```
 12.	To check the connectivity run the below command to confirm that the db2 cli configuration is correct:
-
+```
 Command  mqsicvp -n SAMPLE -u db2inst1 -p passw0rd
 
-
-
-
-[aceuser@04ca06c420ae bin]$ mqsicvp -n SAMPLE -u db2inst1 -p passw0rd
 BIP8290I: Verification passed for the ODBC environment. 
 
 BIP8270I: Connected to Datasource 'SAMPLE' as user 'db2inst1'. The datasource platform is 'DB2/LINUXX8664', version '11.05.0000'.
 
-
+```
 
 Openshift Environment:  
 
