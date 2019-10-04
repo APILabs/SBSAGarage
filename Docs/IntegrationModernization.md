@@ -329,9 +329,6 @@ RUN tar -xvzf ibm_data_server_driver_for_odbc_cli_linuxx64_v11.5.tar.gz
 
 USER aceuser
 
-#COPY odbc.ini /home/aceuser/ace-server/odbc.ini
-#COPY odbcinst.ini /var/mqsi/odbc/odbcinst.ini
-#COPY db2cli.ini /var/mqsi/odbc/db2cli.ini
 
 ENV ODBCINI /home/aceuser/ace-server/odbc.ini
 ENV ODBCSYSINI /home/aceuser/initial-config/odbcini/
