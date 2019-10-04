@@ -299,19 +299,16 @@ Note : If you want to connect to the DB from another container , you need to use
 ## Pre-Requisites:
 1.	Docker installation
 2.	Download/clone git repository
-3.	ODBC cli drivers and libraries
-4.	Base image of app connect enterprise from docker hub or pre-built image.
-5.	Set up the initial-config directory based on the previous steps.
+3.	Base image of app connect enterprise from docker hub or pre-built image.
 
 
 ## Objective: Use a custom docker file to build an app connect enterprise image with db2 cli configurations to create an immutable copy.
 
-
 ## Steps:
 
 1.	Pull the public ibmcom/ace image from docker hub  docker pull ibcom/ace or pre-build the ace image by following the steps of the previous section.
-2.	Create a new directory : ace-db2
-3.	Download the db2clijar files for linux. Link : https://www.ibm.com/support/pages/download-initial-version-115-clients-and-drivers and keep the tar file in the dir ace-db2
+2.	Navigate to the folder : ace-db2cli
+3.	Download the db2clijar files for linux. Link : https://www.ibm.com/support/pages/download-initial-version-115-clients-and-drivers and keep the tar file in the dir ace-db2cli
 4.	Create a new docker file with the below details 
      Filename : dockerfile.acedb2
      
@@ -338,13 +335,12 @@ ENV IE02_PATH=/opt/IBM/ace-11.0.0.5/ie02
 WORKDIR /home/aceuser
 
 
-
 ```
 
-
-5.	Create a folder structure called initial-config/odbcini and place the below files under ace-db2/initial-config/odbcini
+5. Navigate to the folder structure  initial-config/odbcini and place the below files under ace-db2cli/initial-config/odbcini
 
 The below configs in the ini files are to connect to the local docker db2 container that was created in the earlier step.
+
 a.	Db2cli.ini
 ```
 [SAMPLE]
@@ -414,7 +410,7 @@ Threading=2
 ```
 	ace-db2 --> 
 		dockerfile.acedb2
-		ibm_data_server_driver.tar.gz
+		ibm_data_server_driver_for_odbc_cli_linuxx64_v11.5.tar.gz
 		initial-config -->
 			odbcini 
 			    db2cli.ini
@@ -426,7 +422,7 @@ Threading=2
 ```
 
 
-7.  Navigate to the ace-db2 path in the command line and run the below command to build the docker image. Note the last "." 
+7.  Navigate to the ace-db2cli path in the command line and run the below command to build the docker image. Note the last "." 
 
 ```
 Command --> " docker build -t ace-db2:latest --file dockerfile.acedb2 . "
