@@ -1,0 +1,2 @@
+# resource user password
+SAMPLE db2inst1 passw0rd
