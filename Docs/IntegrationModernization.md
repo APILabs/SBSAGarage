@@ -173,33 +173,93 @@ a.	Docker pull ibmcom/db2
 docker run -itd --name mydb2 --privileged=true -p 50000:50000 -e LICENSE=accept -e DB2INST1_PASSWORD=passw0rd -e DBNAME=testdb -v /Users/anjanaananth/Documents/ACE_MQ/DB2:/database ibmcom/db2
 ```
 3.	Check if the image is running and the container is created :
+
 ```
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                      NAMES
 445edc999c16        ibmcom/db2          "/var/db2_setup/lib/…"   3 weeks ago         Up 29 hours         22/tcp, 55000/tcp,	                  mydb2
                  60006-60007/tcp, 
               0.0.0.0:50000->50000/tcp   
+	      
 ```
-4.	Next create a database in DB2 by running the below commands :
-```
+4.	Next create a database in DB2 by running the below commands 
+
+
 	I.	docker exec -it <container-id>  bash
 	II.	su - db2inst1
-	III.	db2start
+	
+```	
+	III.	[db2inst1@445edc999c16 ~]$db2start
+	
+
+	 10/03/2019 17:52:53     0   0   SQL1063N  DB2START processing was successful.
+	SQL1063N  DB2START processing was successful.
 ```
- 
 
 IV.	db2sampl
 
- 
+```
+	 [db2inst1@c1d523c333c6 ~]$ db2sampl
+
+	  Creating database "SAMPLE"...
+	  Existing "SAMPLE" database found...
+	    The "-force" option was not specified...
+	  Attempt to create the database "SAMPLE" failed.
+	  SQL1005N  The database alias "SAMPLE" already exists in either the local 
+	database directory or system database directory.
+
+
+	  'db2sampl' processing complete.
+
+```
 		
-V.	db2
+V.	[db2inst1@445edc999c16 ~]db2
+```
+ (c) Copyright IBM Corporation 1993,2007
+Command Line Processor for DB2 Client 11.5.0.0
 
- 
+You can issue database manager commands and SQL statements from the command 
+prompt. For example:
+    db2 => connect to sample
+    db2 => bind sample.bnd
 
-VI.	connect to sample
+For general help, type: ?.
+For command help, type: ? command, where command can be
+the first few keywords of a database manager command. For example:
+ ? CATALOG DATABASE for help on the CATALOG DATABASE command
+ ? CATALOG          for help on all of the CATALOG commands.
 
- 
+To exit db2 interactive mode, type QUIT at the command prompt. Outside 
+interactive mode, all commands must be prefixed with 'db2'.
+To list the current command option settings, type LIST COMMAND OPTIONS.
+
+For more detailed help, refer to the Online Reference Manual.
+
+```
+
+VI.	db2 => connect to sample
+
+ ```
+   Database Connection Information
+
+ Database server        = DB2/LINUXX8664 11.5.0.0
+ SQL authorization ID   = DB2INST1
+ Local database alias   = SAMPLE
+```
+
 
 5.	List the tables for schema DBTEMP and it will show that an employee table already exists
+
+```
+db2 => list tables for schema DBTEMP
+
+Table/View                      Schema          Type  Creation time             
+------------------------------- --------------- ----- --------------------------
+EMPLOYEES                       DBTEMP          T     2019-09-06-10.06.54.486619
+
+  1 record(s) selected.
+
+
+```
 
 6.	Now that you have a database running you can use this database to connect to your app connect integration flows by following the steps in the next section.
 
@@ -353,12 +413,26 @@ Threading=2
 
 6.	The folder structure and contents should be as below:
 
- 
-
-
-7.	Navigate to the ace-db2 path in the command line and run the below command to build the docker image. Note the last “.”
+	 Folder Structure 
 ```
-docker build -t ace-db2:latest --file dockerfile.acedb2 .
+	ace-db2 --> 
+		dockerfile.acedb2
+		ibm_data_server_driver.tar.gz
+		initial-config -->
+			odbcini 
+			    db2cli.ini
+			    odbc.ini
+			    odbcinst.ini
+			setdbparms
+			    setdbparms.txt
+			    
+```
+
+
+7.  Navigate to the ace-db2 path in the command line and run the below command to build the docker image. Note the last "." 
+
+```
+Command --> " docker build -t ace-db2:latest --file dockerfile.acedb2 . "
 
 Sending build context to Docker daemon   34.6MB
 Step 1/15 : from ibmcom/ace:latest
