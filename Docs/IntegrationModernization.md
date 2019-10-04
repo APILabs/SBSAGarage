@@ -294,7 +294,7 @@ Note : If you want to connect to the DB from another container , you need to use
             }
 ```
 
-## Docker Environment:  Configure DB2 cli and build a docker file for app connect
+## Docker Environment:  Configure DB2 cli and build a docker image for app connect enterprise
 
 ## Pre-Requisites:
 1.	Docker installation
