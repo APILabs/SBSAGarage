@@ -1,6 +1,6 @@
 def env = 'ACE_Dev'
 def srcfolder = 'MF_DEAStatements'
-def laststable = '62'
+def laststable = '63'
 def laststableapp = 'ace-demo-'+ "${laststable}"
 def appName = 'ace-demo-'+ "${BUILD_ID}"
 def projectName = 'ace-sbsa'
@@ -62,6 +62,19 @@ pipeline {
                     echo '************** hostname to access the webui*************'
                     oc get route ${appName}-webui -o=go-template='{{ .spec.host}}'
                   """
+            }
+        }
+        stage('Build') 
+        {
+            steps {
+                echo 'maven clean'
+                //ABC indicates the folder name where the pom.xml file resides
+                sh ' mvn -f ./ACE_Dev/MF_DEAStatements/Test/junit_test/pom.xml test'  
+            }
+            post {
+                success {
+                    echo 'Now Archiving'
+                }
             }
         }
         stage('cleanup') {
