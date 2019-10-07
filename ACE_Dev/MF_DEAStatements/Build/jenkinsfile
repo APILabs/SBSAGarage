@@ -33,7 +33,7 @@ pipeline {
           {
           steps{
             script {
-              openshift.withCluster('mycluster', 'id-token-client'){
+              openshift.withCluster('mycluster'){
                 openshift.withProject(projectName) {
                    def created = openshift.newApp( "${appName}:latest", '-e LICENSE=accept -e ACE_SERVER_NAME=ACESERVER' , "--name=${appName}")
                    echo "new-app created ${created.count()} objects named: ${created.names()}"
@@ -80,7 +80,7 @@ pipeline {
         stage('cleanup') {
           steps{
             script {
-              openshift.withCluster('mycluster', 'id-token-client'){
+              openshift.withCluster('mycluster'){
                     openshift.withProject(projectName)
                     {
                       openshift.selector("all", [ build : laststableapp ]).delete()
