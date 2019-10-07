@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="2" failures="1" name="junit_test.EnpointTest" time="0.199" errors="0" skipped="0">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/amd64"/>
+    <property name="java.vm.version" value="25.131-b11"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="maven.multiModuleProjectDirectory" value="/home/ronald/Ronald/workspaces/neon/junit_test"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="ZA"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/var/lib/jenkins/workspace/junit-demo"/>
+    <property name="java.runtime.version" value="1.8.0_131-b11"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-8-oracle/jre/lib/endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="os.name" value="Linux"/>
+    <property name="classworlds.conf" value="/usr/share/maven/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="maven.conf" value="/usr/share/maven/conf"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="5.0.0-29-generic"/>
+    <property name="library.jansi.path" value="/usr/share/maven/lib/jansi-native"/>
+    <property name="user.home" value="/var/lib/jenkins"/>
+    <property name="user.timezone" value="Africa/Johannesburg"/>
+    <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="jenkins"/>
+    <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.x.jar"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/usr/lib/jvm/java-8-oracle/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -f /home/ronald/Ronald/workspaces/neon/junit_test test"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_131"/>
+    <property name="java.ext.dirs" value="/usr/lib/jvm/java-8-oracle/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="securerandom.source" value="file:/dev/./urandom"/>
+    <property name="sun.boot.class.path" value="/usr/lib/jvm/java-8-oracle/jre/lib/resources.jar:/usr/lib/jvm/java-8-oracle/jre/lib/rt.jar:/usr/lib/jvm/java-8-oracle/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jsse.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jce.jar:/usr/lib/jvm/java-8-oracle/jre/lib/charsets.jar:/usr/lib/jvm/java-8-oracle/jre/lib/jfr.jar:/usr/lib/jvm/java-8-oracle/jre/classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="/usr/share/maven"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase classname="junit_test.EnpointTest" name="test" time="0.133"/>
+  <testcase classname="junit_test.EnpointTest" name="test2" time="0.066">
+    <failure message="expected null, but was:&lt;&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected null, but was:&lt;&gt;
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotNull(Assert.java:755)
+	at org.junit.Assert.assertNull(Assert.java:737)
+	at org.junit.Assert.assertNull(Assert.java:747)
+	at junit_test.EnpointTest.test2(EnpointTest.java:56)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</failure>
+    <system-out>&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:ps=&quot;http://standardbank.co.za/sa/services/Technical/Integration/Integration/PS_ESC_LegacyStatementDataV1&quot; xmlns:head=&quot;http://standardbank.co.za/sa/services/Global/IfxV2_1/HeaderV2_0&quot;&gt;
+   &lt;soapenv:Header/&gt;
+   &lt;soapenv:Body&gt;
+      &lt;ps:ProcessESCResponse&gt;
+         &lt;head:Status Id=&quot;?&quot;&gt;
+            &lt;head:StatusCode&gt;?&lt;/head:StatusCode&gt;
+            &lt;!--Optional:--&gt;
+            &lt;head:ServerStatusCode&gt;?&lt;/head:ServerStatusCode&gt;
+            &lt;head:Severity&gt;?&lt;/head:Severity&gt;
+            &lt;!--Optional:--&gt;
+            &lt;head:StatusDesc&gt;?&lt;/head:StatusDesc&gt;
+            &lt;!--Zero or more repetitions:--&gt;
+            &lt;head:SubjectElement&gt;
+               &lt;head:Path&gt;?&lt;/head:Path&gt;
+               &lt;!--Optional:--&gt;
+               &lt;head:Value&gt;?&lt;/head:Value&gt;
+            &lt;/head:SubjectElement&gt;
+            &lt;!--Zero or more repetitions:--&gt;
+            &lt;head:AdditionalStatus&gt;
+               &lt;!--Optional:--&gt;
+               &lt;head:StatusCode&gt;?&lt;/head:StatusCode&gt;
+               &lt;!--Optional:--&gt;
+               &lt;head:ServerStatusCode&gt;?&lt;/head:ServerStatusCode&gt;
+               &lt;head:Severity&gt;?&lt;/head:Severity&gt;
+               &lt;!--Optional:--&gt;
+               &lt;head:StatusDesc&gt;?&lt;/head:StatusDesc&gt;
+               &lt;!--Zero or more repetitions:--&gt;
+               &lt;head:SubjectElement&gt;
+                  &lt;head:Path&gt;?&lt;/head:Path&gt;
+                  &lt;!--Optional:--&gt;
+                  &lt;head:Value&gt;?&lt;/head:Value&gt;
+               &lt;/head:SubjectElement&gt;
+            &lt;/head:AdditionalStatus&gt;
+            &lt;!--Optional:--&gt;
+            &lt;head:AsyncRsData&gt;
+               &lt;!--Optional:--&gt;
+               &lt;head:AvailDt&gt;?&lt;/head:AvailDt&gt;
+               &lt;!--Optional:--&gt;
+               &lt;head:ExpDt&gt;?&lt;/head:ExpDt&gt;
+            &lt;/head:AsyncRsData&gt;
+         &lt;/head:Status&gt;
+         &lt;head:RqUID&gt;?&lt;/head:RqUID&gt;
+         &lt;head:MsgRsHdr&gt;
+            &lt;!--Optional:--&gt;
+            &lt;head:AsyncRqUID&gt;?&lt;/head:AsyncRqUID&gt;
+            &lt;head:ContextRsHdr&gt;
+               &lt;head:ServerDt&gt;?&lt;/head:ServerDt&gt;
+               &lt;!--Optional:--&gt;
+               &lt;head:ServerTerminalSeqNum&gt;?&lt;/head:ServerTerminalSeqNum&gt;
+               &lt;head:BusinessScopeXSB&gt;?&lt;/head:BusinessScopeXSB&gt;
+               &lt;head:ContentTypeXSB&gt;?&lt;/head:ContentTypeXSB&gt;
+               &lt;head:IntegrationServerXSB&gt;?&lt;/head:IntegrationServerXSB&gt;
+               &lt;head:MsgGroupReferenceXSB&gt;?&lt;/head:MsgGroupReferenceXSB&gt;
+            &lt;/head:ContextRsHdr&gt;
+         &lt;/head:MsgRsHdr&gt;
+         &lt;ps:StatementData&gt;
+            &lt;!--You may enter the following 3 items in any order--&gt;
+            &lt;!--Optional:--&gt;
+            &lt;ps:business_contents&gt;
+               &lt;!--You may enter the following 8 items in any order--&gt;
+               &lt;!--Optional:--&gt;
+               &lt;ps:output_customer&gt;
+                  &lt;!--You may enter the following 13 items in any order--&gt;
+                  &lt;ps:number&gt;100325464&lt;/ps:number&gt;
+                  &lt;!--Optional:--&gt;
+                  &lt;ps:title&gt;
+                     &lt;!--You may enter the following 2 items in any order--&gt;
+                     &lt;ps:en&gt;MR&lt;/ps:en&gt;
+                  &lt;/ps:title&gt;
+                  &lt;!--Optional:--&gt;
+                  &lt;ps:initials&gt;C&lt;/ps:initials&gt;
+                  &lt;!--Optional:--&gt;
+                  &lt;ps:id_number&gt;8001095257093&lt;/ps:id_number&gt;
+                  &lt;!--Optional:--&gt;
+                  &lt;ps:relationship_manager&gt;
+                     &lt;!--You may enter the following 6 items in any order--&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:name/&gt;
+                  &lt;/ps:relationship_manager&gt;
+                  &lt;!--Optional:--&gt;
+                  &lt;ps:language&gt;
+                     &lt;!--You may enter the following 2 items in any order--&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:code&gt;E&lt;/ps:code&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:description&gt;
+                        &lt;ps:en&gt;ENGLISH&lt;/ps:en&gt;
+                     &lt;/ps:description&gt;
+                  &lt;/ps:language&gt;
+                  &lt;!--Optional:--&gt;
+                  &lt;ps:controlling_centre&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:en/&gt;
+                  &lt;/ps:controlling_centre&gt;
+                  &lt;!--Optional:--&gt;
+                  &lt;ps:market_segment&gt;
+                     &lt;!--You may enter the following 2 items in any order--&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:code&gt;110&lt;/ps:code&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:colour&gt;000000000&lt;/ps:colour&gt;
+                  &lt;/ps:market_segment&gt;
+               &lt;/ps:output_customer&gt;
+               &lt;!--Optional:--&gt;
+               &lt;ps:bank_contact&gt;
+                  &lt;ps:contact_centre&gt;
+                     &lt;!--You may enter the following 4 items in any order--&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:telephone&gt;0860 101 341&lt;/ps:telephone&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:fax&gt;0&lt;/ps:fax&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:web_address&gt;www.standardbank.co.za&lt;/ps:web_address&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:email_address&gt;info@standardbank.co.za&lt;/ps:email_address&gt;
+                  &lt;/ps:contact_centre&gt;
+               &lt;/ps:bank_contact&gt;
+               &lt;!--Optional:--&gt;
+               &lt;ps:output_accounts&gt;
+                  &lt;ps:account&gt;
+                     &lt;!--You may enter the following 36 items in any order--&gt;
+                     &lt;ps:name&gt; BRTHREE C&lt;/ps:name&gt;
+                     &lt;ps:serial_number&gt;0&lt;/ps:serial_number&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:type&gt;000&lt;/ps:type&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:style&gt;na&lt;/ps:style&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:suite&gt;?&lt;/ps:suite&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:last_statement_date&gt;2014-10-29&lt;/ps:last_statement_date&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:next_statement_date&gt;2014-11-16&lt;/ps:next_statement_date&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:last_active_date&gt;2014-10-16&lt;/ps:last_active_date&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:closed_date&gt;9999-12-31&lt;/ps:closed_date&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:open_date&gt;2012-03-10&lt;/ps:open_date&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:exempt_ind&gt;N&lt;/ps:exempt_ind&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:overdraft&gt;
+                        &lt;!--You may enter the following 4 items in any order--&gt;
+                        &lt;!--Optional:--&gt;
+                        &lt;ps:interest&gt;
+                           &lt;!--You may enter the following 3 items in any order--&gt;
+                           &lt;!--Optional:--&gt;
+                           &lt;ps:rate&gt;0.00&lt;/ps:rate&gt;
+                           &lt;!--Optional:--&gt;
+                           &lt;!--Optional:--&gt;
+                           &lt;ps:amount&gt;0.00&lt;/ps:amount&gt;
+                        &lt;/ps:interest&gt;
+                        &lt;!--Optional:--&gt;
+                        &lt;ps:rate_above_limit&gt;0.00&lt;/ps:rate_above_limit&gt;
+                        &lt;!--Optional:--&gt;
+                        &lt;ps:limit&gt;0.00&lt;/ps:limit&gt;
+                        &lt;!--Optional:--&gt;
+                        &lt;ps:review_date/&gt;
+                     &lt;/ps:overdraft&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:portfolio_number&gt;0&lt;/ps:portfolio_number&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:investment payment_cycle=&quot;?&quot;&gt;
+                        &lt;ps:disposal_instructions/&gt;
+                     &lt;/ps:investment&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:product&gt;
+                        &lt;ps:number&gt;1575&lt;/ps:number&gt;
+                        &lt;!--Optional:--&gt;
+                        &lt;ps:name&gt;
+                           &lt;ps:en&gt;CLASSIC TRANSACTION ACCOUNT&lt;/ps:en&gt;
+                        &lt;/ps:name&gt;
+                        &lt;!--Optional:--&gt;
+                        &lt;ps:type&gt;CHEQUE&lt;/ps:type&gt;
+                        &lt;!--Optional:--&gt;
+                        &lt;ps:sub_category&gt;
+                           &lt;!--Optional:--&gt;
+                           &lt;ps:code&gt;?&lt;/ps:code&gt;
+                        &lt;/ps:sub_category&gt;
+                     &lt;/ps:product&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:preferred_centre&gt;
+                        &lt;ps:en&gt;RANDFONTEIN SERVICE CENTRE&lt;/ps:en&gt;
+                     &lt;/ps:preferred_centre&gt;
+                     &lt;ps:number&gt;420612351&lt;/ps:number&gt;
+                  &lt;/ps:account&gt;
+               &lt;/ps:output_accounts&gt;
+               &lt;!--Optional:--&gt;
+               &lt;ps:paging&gt;
+                  &lt;!--Optional:--&gt;
+                  &lt;ps:pageIndicator&gt;?&lt;/ps:pageIndicator&gt;
+                  &lt;!--Optional:--&gt;
+                  &lt;ps:page_number&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:current&gt;?&lt;/ps:current&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:sapcurrent&gt;?&lt;/ps:sapcurrent&gt;
+                  &lt;/ps:page_number&gt;
+                  &lt;!--Optional:--&gt;
+                  &lt;ps:last_page&gt;?&lt;/ps:last_page&gt;
+                  &lt;!--Optional:--&gt;
+                  &lt;ps:limit_exceeded&gt;?&lt;/ps:limit_exceeded&gt;
+               &lt;/ps:paging&gt;
+               &lt;!--Optional:--&gt;
+               &lt;!--Optional:--&gt;
+               &lt;ps:sort&gt;
+                  &lt;ps:indicator&gt;?&lt;/ps:indicator&gt;
+               &lt;/ps:sort&gt;
+               &lt;!--Optional:--&gt;
+               &lt;ps:output_transactions&gt;
+                  e
+                  &lt;!--Optional:--&gt;
+                  &lt;ps:header&gt;
+                     &lt;!--You may enter the following 6 items in any order--&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:opening_balance&gt;
+                        &lt;ps:value&gt;497.98&lt;/ps:value&gt;
+                        &lt;ps:date&gt;2014-10-16&lt;/ps:date&gt;
+                     &lt;/ps:opening_balance&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:no_of_transactions&gt;1&lt;/ps:no_of_transactions&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:start_date&gt;2014-10-16&lt;/ps:start_date&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:end_date&gt;2014-10-30&lt;/ps:end_date&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:date_error_code/&gt;
+                  &lt;/ps:header&gt;
+                  gero
+                  &lt;!--Zero or more repetitions:--&gt;
+                  &lt;ps:transaction&gt;
+                     &lt;!--You may enter the following 12 items in any order--&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:type&gt;1093&lt;/ps:type&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:amount&gt;-5.00&lt;/ps:amount&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:dbcr&gt;dr&lt;/ps:dbcr&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:balance_after&gt;
+                        &lt;ps:value&gt;492.98&lt;/ps:value&gt;
+                     &lt;/ps:balance_after&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:date&gt;2014-10-16&lt;/ps:date&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:narrative&gt;?&lt;/ps:narrative&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:ent_ref&gt;000000094&lt;/ps:ent_ref&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:voucher_number&gt;0&lt;/ps:voucher_number&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:interest&gt;
+                        &lt;!--You may enter the following 3 items in any order--&gt;
+                        &lt;!--Optional:--&gt;
+                        &lt;ps:rate&gt;0.000&lt;/ps:rate&gt;
+                     &lt;/ps:interest&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:service_fee&gt;0.00&lt;/ps:service_fee&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:vat&gt;
+                        &lt;ps:indicator&gt;Y&lt;/ps:indicator&gt;
+                        &lt;ps:symbol&gt;##&lt;/ps:symbol&gt;
+                     &lt;/ps:vat&gt;
+                     &lt;!--Optional:--&gt;
+                     &lt;ps:description&gt;
+                        &lt;!--You may enter the following 2 items in any order--&gt;
+                        &lt;!--Optional:--&gt;
+                        &lt;ps:en&gt;STOP ORDER HANDLING FEE                      &lt;/ps:en&gt;
+                     &lt;/ps:description&gt;
+                  &lt;/ps:transaction&gt;
+                  cum
+               &lt;/ps:output_transactions&gt;
+               &lt;!--Optional:--&gt;
+            &lt;/ps:business_contents&gt;
+            &lt;!--Optional:--&gt;
+         &lt;/ps:StatementData&gt;
+      &lt;/ps:ProcessESCResponse&gt;
+   &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;
+
+</system-out>
+  </testcase>
+</testsuite>
