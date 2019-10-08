@@ -61,7 +61,9 @@ pipeline {
             steps {
                 echo 'maven clean'
                 //ABC indicates the folder name where the pom.xml file resides
-                sh ' mvn -f ./ACE_Dev/MF_DEAStatements/Test/junit_test/pom.xml test'  
+                withMaven(installation: 'maven1') {
+                      sh ' mvn -f ./ACE_Dev/MF_DEAStatements/Test/junit_test/pom.xml test'  
+                }
             }
             post {
                 success {
