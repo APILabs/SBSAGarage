@@ -1,0 +1,89 @@
+def env = 'ACE_Dev'
+def srcfolder = 'MF_DEAStatements'
+def laststable = '63'
+def laststableapp = 'ace-demo-'+ "${laststable}"
+def appName = 'ace-demo-'+ "${BUILD_ID}"
+def projectName = 'ace-sbsa'
+pipeline {
+    agent any
+    stages{
+        stage("Build Image") {
+              steps{
+                dir('ACE_Dev/MF_DEAStatements'){
+                  sh "cat Build/dockerfile | oc new-build -D - --name  ${appName}"
+                }
+              }
+          }
+          stage("Start Build") {
+              steps{
+                dir('ACE_Dev/MF_DEAStatements'){
+                  sh "oc start-build ${appName} --from-dir . --follow"
+                }
+              }
+          }
+          stage('Run')
+          {
+          steps{
+            script {
+              openshift.withCluster('mycluster'){
+                openshift.withProject(projectName) {
+                   def created = openshift.newApp( "${appName}:latest", '-e LICENSE=accept -e ACE_SERVER_NAME=ACESERVER' , "--name=${appName}")
+                   echo "new-app created ${created.count()} objects named: ${created.names()}"
+                   created.describe()
+
+                   def rm = openshift.selector("dc", appName).rollout()
+                   timeout(2){
+                      openshift.selector("dc", appName).related('pods').untilEach(1) {
+                          return (it.object().status.phase == "Running")
+                        }
+                  }
+                }
+              }
+            }
+          }
+        }
+        stage('Expose App')
+        {
+            steps {
+                sh """
+                    oc expose service ${appName} --name=${appName}-webui --port=7600 --generator="route/v1"
+                    oc expose service ${appName} --name=${appName}-http --port=7800 --generator="route/v1"
+
+                    echo '************** hostname to access the webui*************'
+                    oc get route ${appName}-http -o=go-template='{{ .spec.host}}'
+                    echo '************** hostname to access the webui*************'
+                    oc get route ${appName}-webui -o=go-template='{{ .spec.host}}'
+                  """
+            }
+        }
+        stage('Build') 
+        {
+            steps {
+                echo 'maven clean'
+                //ABC indicates the folder name where the pom.xml file resides
+                sh ' mvn -f ./ACE_Dev/MF_DEAStatements/Test/junit_test/pom.xml test'  
+            }
+            post {
+                success {
+                    echo 'Now Archiving'
+                }
+            }
+        }
+        stage('cleanup') {
+          steps{
+            script {
+              openshift.withCluster('mycluster'){
+                    openshift.withProject(projectName)
+                    {
+                      openshift.selector("all", [ build : laststableapp ]).delete()
+                      if (openshift.selector("pods", [ app : laststableapp ]).exists())
+                      {
+                       openshift.selector("all", [ app : laststableapp ]).delete()
+                      }
+                    }
+              }
+            }
+          }
+        }
+    }
+}
