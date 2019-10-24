@@ -1,5 +1,6 @@
 FROM docker-registry.default.svc:5000/mq/ibm-mqadvanced-server-integration:9.1.3.0-r1-amd64
 # Add the admin user as a member of the mqm group and set their password
+# Adding new config 
 USER root
 RUN useradd admin -G mqm \
     && echo admin:passw0rd | chpasswd \
