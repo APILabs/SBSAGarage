@@ -1,0 +1,25 @@
+* Create Local Queues that my application(s) can use.
+DEFINE QLOCAL('EXAMPLE.QUEUE.1') REPLACE
+DEFINE QLOCAL('EXAMPLE.QUEUE.2') REPLACE
+
+* Create a Dead Letter Queue for undeliverable messages and set the Queue Manager to use it.
+DEFINE QLOCAL('EXAMPLE.DEAD.LETTER.QUEUE') REPLACE
+ALTER QMGR DEADQ('EXAMPLE.DEAD.LETTER.QUEUE')
+
+* Set ADOPTCTX to YES so we use the same userid passed for authentication as the one for authorization and refresh the security configuration
+ALTER AUTHINFO(SYSTEM.DEFAULT.AUTHINFO.IDPWOS) AUTHTYPE(IDPWOS) ADOPTCTX(YES)
+REFRESH SECURITY(*) TYPE(CONNAUTH)
+
+* Create a entry channel for the Admin user and Application user
+DEFINE CHANNEL('EXAMP.ADMIN.SVRCONN') CHLTYPE(SVRCONN) REPLACE
+DEFINE CHANNEL('EXAMP.APP.SVRCONN') CHLTYPE(SVRCONN) MCAUSER('app') REPLACE
+
+* Set Channel authentication rules to only allow access through the two channels we created and only allow admin users to connect through EXAMPLE.ADMIN.SVRCONN
+SET CHLAUTH('*') TYPE(ADDRESSMAP) ADDRESS('*') USERSRC(NOACCESS) DESCR('Back-stop rule - Blocks everyone') ACTION(REPLACE)
+SET CHLAUTH('EXAMP.APP.SVRCONN') TYPE(ADDRESSMAP) ADDRESS('*') USERSRC(CHANNEL) DESCR('Allows connection via APP channel') ACTION(REPLACE)
+SET CHLAUTH('EXAMP.ADMIN.SVRCONN') TYPE(ADDRESSMAP) ADDRESS('*') USERSRC(CHANNEL) DESCR('Allows connection via ADMIN channel') ACTION(REPLACE)
+SET CHLAUTH('EXAMP.ADMIN.SVRCONN') TYPE(BLOCKUSER) USERLIST('nobody') DESCR('Allows admins on ADMIN channel') ACTION(REPLACE)
+
+* Set Authority records to allow the members of the mqclient group to connect to the Queue Manager and access the Local Queues which start with "EXAMPLE."
+SET AUTHREC OBJTYPE(QMGR) GROUP('mqclient') AUTHADD(CONNECT,INQ)
+SET AUTHREC PROFILE('EXAMPLE.**') OBJTYPE(QUEUE) GROUP('mqclient') AUTHADD(INQ,PUT,GET,BROWSE)
