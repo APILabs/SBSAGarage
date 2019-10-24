@@ -1,1 +1,21 @@
-
+def appName = 'mq'+ "${BUILD_ID}"
+def projectName = 'mq'
+pipeline {
+    agent any
+    stages{
+        stage("Build Image") {
+              steps{
+                dir('MQ'){
+                  sh "cat dockerfile | oc new-build -D - --name  ${appName}"
+                }
+              }
+          }
+          stage("Start Build") {
+              steps{
+                dir('MQ'){
+                  sh "oc start-build ${appName} --from-dir . --follow"
+                }
+              }
+          }
+    }
+}
