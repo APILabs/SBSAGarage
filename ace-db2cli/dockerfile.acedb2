@@ -1,6 +1,6 @@
 from ibmcom/ace:latest
 
-USER root
+USER aceuser
 RUN echo $PWD
 
 RUN mkdir -p /home/aceuser/db2cli_odbc_driver
@@ -8,8 +8,6 @@ COPY ibm_data_server_driver_for_odbc_cli_linuxx64_v11.5.tar.gz /home/aceuser/db2
 WORKDIR /home/aceuser/db2cli_odbc_driver
 RUN echo $PWD
 RUN tar -xvzf ibm_data_server_driver_for_odbc_cli_linuxx64_v11.5.tar.gz
-
-USER aceuser
 
 #COPY odbc.ini /home/aceuser/ace-server/odbc.ini
 #COPY odbcinst.ini /var/mqsi/odbc/odbcinst.ini
