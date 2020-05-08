@@ -331,7 +331,7 @@ ENV ODBCINI /home/aceuser/ace-server/odbc.ini
 ENV ODBCSYSINI /home/aceuser/initial-config/odbcini/
 ENV DB2CLIINIPATH /home/aceuser/initial-config/odbcini/
 ENV LD_LIBRARY_PATH /home/aceuser/db2cli_odbc_driver/odbc_cli/clidriver/lib
-ENV IE02_PATH=/opt/IBM/ace-11.0.0.5/ie02
+ENV IE02_PATH=/opt/ibm/ace-11/ie02
 WORKDIR /home/aceuser
 
 
