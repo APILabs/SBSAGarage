@@ -1,4 +1,4 @@
-FROM ace-demo-8:latest
+FROM ibmcom/ace-mqclient:latest
 
 COPY Bars/*.bar /home/aceuser/bars/
 
