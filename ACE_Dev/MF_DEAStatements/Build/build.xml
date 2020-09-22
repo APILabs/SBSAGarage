@@ -2,7 +2,7 @@
 <project name="project" default="run">
   <target name="run" description="">
    <property environment="env"/>
-   <property name="workspace.dir" value="/home/bamboo/bamboo-home/xml-data/build-dir/MVP-DEV-CCFG/ACE_Dev" />
+   <property name="workspace.dir" value="/home/bamboo/bamboo-home/xml-data/build-dir/MVP-DEV-BBAR/ACE_Dev" />
    <property name="project.name" value="MF_DEAStatements" />
    <property name="toolkit.home" value="/opt/IBM/ace-11.0.0.9/tools" />
    <property name="ant.bars.basedir" value="${workspace.dir}/${project.name}/Bars" />
