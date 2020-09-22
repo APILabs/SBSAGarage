@@ -1,0 +1,8 @@
+apiVersion: appconnect.ibm.com/v1beta1
+kind: Configuration
+metadata:
+  name: cloud.jks
+  namespace: replace-with-namespace
+spec:
+  contents: replace-with-truststore-bas64
+  type: truststore
