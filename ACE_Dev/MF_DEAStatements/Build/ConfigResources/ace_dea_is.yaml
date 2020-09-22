@@ -18,9 +18,8 @@ spec:
   version: 11.0.0
   configurations:
     - server-conf
-    - policy-conf
     - setdbparms-conf
-    - es-cert.p12
+    - cloud.jks
   pod:
     imagePullSecrets:
     -  name: deployer-dockercfg-hv62v
