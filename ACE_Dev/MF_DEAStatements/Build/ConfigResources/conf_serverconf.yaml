@@ -1,0 +1,8 @@
+apiVersion: appconnect.ibm.com/v1beta1
+kind: Configuration
+metadata:
+  name: server-conf
+  namespace: replace-with-namespace
+spec:
+  contents: replace-with-serverconf-bas64
+  type: serverconf
