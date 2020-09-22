@@ -1,0 +1,2 @@
+kafka::cloudES aws-logger Vhqvk09ounFb
+setdbparms::truststore m56ju71% m56ju71%
