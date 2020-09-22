@@ -28,5 +28,5 @@ spec:
       runtime:
         image: image-registry.openshift-image-registry.svc:5000/ace/replaceWithBakedImage
   tracing:
-    enabled: true
+    enabled: false
     namespace: opsdashboard
