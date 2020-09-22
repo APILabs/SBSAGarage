@@ -1,0 +1,33 @@
+apiVersion: appconnect.ibm.com/v1beta1
+kind: IntegrationServer
+metadata:
+  name: replaceIntServerName
+  namespace: replaceNamespace
+spec:
+  designerFlowsOperationMode: disabled
+  license:
+    accept: true
+    license: L-AMYG-BQ2E4U
+    use: CloudPakForIntegrationProduction
+  replicas: 1
+  router:
+    timeout: 120s
+  service:
+    endpointType: http
+  useCommonServices: true
+  version: 11.0.0
+  configurations:
+    - server-conf
+    - policy-conf
+    - setdbparms-conf
+    - es-cert.p12
+  pod:
+    imagePullSecrets:
+    -  name: deployer-dockercfg-hv62v
+    -  name: ibm-entitlement-key
+    containers:
+      runtime:
+        image: image-registry.openshift-image-registry.svc:5000/ace/replaceWithBakedImage
+  tracing:
+    enabled: true
+    namespace: opsdashboard
