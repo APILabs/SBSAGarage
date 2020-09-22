@@ -1,0 +1,33 @@
+ResourceManagers:
+  JVM:
+    #jvmVerboseOption: 'none'
+    #jvmDisableClassGC: ''
+    #jvmEnableIncGC: ''
+    #jvmShareClasses: ''
+    #jvmNativeStackSize: -1
+    #jvmJavaOSStackSize: -1
+    #jvmMinHeapSize: 33554432        # minimum JVM  heap size in bytes (32MB)
+    #jvmMaxHeapSize: 268435456       # maximum JVM heap size in bytes (256MB)
+    jvmDebugPort: 3123                 # Set non-zero to activate JVM debug port for Toolkit debugging
+    #jvmSystemProperty: ''
+    keystoreType: 'JKS'                # JVM key store type
+    keystoreFile: '/home/aceuser/truststores/cloud.jks'                # JVM location of the key store
+    keystorePass: 'setdbparms::truststore'                # JVM resource alias containing the key store password
+    truststoreType: 'JKS'               # JVM trust store type
+    truststoreFile: '/home/aceuser/truststores/cloud.jks'              # JVM location of the trust store
+    truststorePass: 'setdbparms::truststore'              # JVM resource alias containing the trust store password
+    #crlFileList: ''
+    #enableCRLDP: ''
+    #kerberosConfigFile: ''
+    #kerberosKeytabFile: ''
+ServerCredentials:
+  # Optionally define credentials for use by the Integration Server.
+  # Customize the CredentialType section for each type of credential that you want to create credentials for.
+  # You must define each CredentialType at most once.
+  # Each CredentialName must be unique within the CredentialType.
+  # Each CredentialType has a set of allowable properties which are a subset of username, password, passphrase, apiKey, clientId, clientSecret, sshIdentityFile.
+  # For full details of allowed CredentialTypes and their properties, refer to the Knowledge Center.
+  kafka:
+    CloudES:
+      username: 'aws-logger'
+      password: 'Vhqvk09ounFb'    
