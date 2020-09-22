@@ -1,0 +1,8 @@
+apiVersion: appconnect.ibm.com/v1beta1
+kind: Configuration
+metadata:
+  name: setdbparms-conf
+  namespace: replace-with-namespace
+spec:
+  contents: replace-with-setdbparms-bas64
+  type: setdbparms
