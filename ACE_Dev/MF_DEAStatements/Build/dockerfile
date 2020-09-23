@@ -1,5 +1,4 @@
-FROM ibmcom/ace-mqclient:latest
-USER aceuser
+FROM cp.icr.io/cp/appc/ace-server-prod:latest
 COPY Bars/*.bar /home/aceuser/bars/
 
 RUN ace_compile_bars.sh
